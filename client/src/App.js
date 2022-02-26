@@ -10,15 +10,16 @@ import Posts from "./components/posts/posts";
 import Statistics from "./components/statistics/statistics";
 import {useState} from "react";
 import LoginForm from "./components/loginform/loginform";
+import {LoginContext} from "./context/context";
 
 const App = () => {
 
-  const [logged, setLogged] = useState(false);
-
-  if ( !logged )
-    return <Grid container justifyContent="center"><LoginForm/></Grid>
+  const [loggedIn, setLoggedIn] = useState(false);
 
   return (
+      <LoginContext.Provider value={{loggedIn, setLoggedIn}}>
+      { !loggedIn ?
+      <Grid container justifyContent="center"><LoginForm/></Grid> :
       <Router>
         <Grid container justifyContent="center">
           <Grid item xs={2}>
@@ -42,6 +43,8 @@ const App = () => {
           </Grid>
         </Grid>
       </Router>
+      }
+      </LoginContext.Provider>
   );
 };
 

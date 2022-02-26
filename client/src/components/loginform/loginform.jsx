@@ -1,11 +1,14 @@
 import {TextValidator, ValidatorForm} from "react-material-ui-form-validator";
 import Button from "@mui/material/Button";
 import {Alert, CircularProgress} from "@mui/material";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useMutation} from "@apollo/client";
 import {LOGIN_USER} from "../../mutation/user";
+import {LoginContext} from "../../context/context";
 
 function LoginForm() {
+
+    const {loggedIn, setLoggedIn} = useContext(LoginContext);
 
     const createFormData = ( clientid, email, name ) => {
         return { clientid: clientid, email: email, name: name };
@@ -40,7 +43,7 @@ function LoginForm() {
             console.log(data);
             const status = data.status;
             setLoginSuccess( true );
-            setTimeout( () => window.location = '/posts', 3000 );
+            setLoggedIn( true );
         }).catch( (e) => {
             console.log( e );
             const status = data.status;
@@ -52,8 +55,9 @@ function LoginForm() {
         setSubmitted( true );
         setTimeout( ()=> setSubmitted( false ), 5000 );
     }
-
+console.log( loggedIn );
     return (
+
         <ValidatorForm
             onSubmit={handleSubmit} >
             <h2>Login</h2>
