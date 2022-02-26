@@ -15,33 +15,33 @@ const App = () => {
 
   const [logged, setLogged] = useState(false);
 
-  return (
-      (!logged ? <LoginForm/> :
+  if ( !logged )
+    return <LoginForm/>
 
-        <Router>
-          <Grid container justifyContent="center">
-            <Grid item xs={2}>
-              <div className="sidebar">
-                <NavLink to="/posts" className={({isActive}) => 'link' + (isActive ? ' activeLink' : '')}>
-                  <PermIdentityIcon/>
-                  <h2>Posts</h2>
-                </NavLink>
-                <NavLink to="/statistics" className={({isActive}) => 'link' + (isActive ? ' activeLink' : '')}>
-                  <Lists/>
-                  <h2>Statistics</h2>
-                </NavLink>
-              </div>
-            </Grid>
-            <Grid item xs={6} style={{margin: '20px'}}>
-              <Routes>
-                <Route exact path='/' element={<Posts/>}/>
-                <Route path='/posts' element={<Posts/>}/>
-                <Route path='/statistics' element={<Statistics/>}/>
-              </Routes>
-            </Grid>
+  return (
+      <Router>
+        <Grid container justifyContent="center">
+          <Grid item xs={2}>
+            <div className="sidebar">
+              <NavLink to="/posts" className={({isActive}) => 'link' + (isActive ? ' activeLink' : '')}>
+                <PermIdentityIcon/>
+                <h2>Posts</h2>
+              </NavLink>
+              <NavLink to="/statistics" className={({isActive}) => 'link' + (isActive ? ' activeLink' : '')}>
+                <Lists/>
+                <h2>Statistics</h2>
+              </NavLink>
+            </div>
           </Grid>
-        </Router>
-      )
+          <Grid item xs={6} style={{margin: '20px'}}>
+            <Routes>
+              <Route exact path='/' element={<Posts/>}/>
+              <Route path='/posts' element={<Posts/>}/>
+              <Route path='/statistics' element={<Statistics/>}/>
+            </Routes>
+          </Grid>
+        </Grid>
+      </Router>
   );
 };
 
