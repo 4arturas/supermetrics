@@ -15,12 +15,6 @@ function LoginForm() {
     }
 
     const [formData, setFormData]       = useState(createFormData( 'ju16a6m81mhid5ue1z3v2g0uh', 'your@email.address', 'Your Name' ));
-
-    const [submitted, setSubmitted]     = useState(false);
-
-    const [loginSuccess, setLoginSuccess]                   = useState( false );
-    const [unsuccessfulLoginText, setUnsuccessfulLoginText]         = useState( null );
-
     const [loginUser, { data, loading, error }]                 = useMutation(LOGIN_USER);
 
     const handleChange = (event) => {
@@ -31,8 +25,6 @@ function LoginForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setLoginSuccess( false );
-        setUnsuccessfulLoginText( null );
         loginUser({
             variables: {
                 input: {
@@ -42,20 +34,15 @@ function LoginForm() {
         }).then(({data}) => {
             console.log(data);
             const status = data.status;
-            setLoginSuccess( true );
             setLoggedIn( true );
         }).catch( (e) => {
             console.log( e );
-            const status = data.status;
-            if ( status !== 200 )
-                setUnsuccessfulLoginText( data.statusText );
-            else
-                setUnsuccessfulLoginText( e.message );
         })
-        setSubmitted( true );
-        setTimeout( ()=> setSubmitted( false ), 5000 );
     }
-console.log( loggedIn );
+
+    if ( loggedIn )
+        return <div></div>
+
     return (
 
         <ValidatorForm
@@ -98,8 +85,6 @@ console.log( loggedIn );
             </Button>
             { loading && <div><br/><CircularProgress /></div> }
             <br/>
-            { loginSuccess && <Alert severity="success">Login went well - you will be redirect soon to the user page</Alert> }
-            { ( unsuccessfulLoginText ) && <Alert severity="error">{unsuccessfulLoginText}</Alert> }
         </ValidatorForm>
     )
 }

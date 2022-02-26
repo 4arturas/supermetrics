@@ -10,11 +10,12 @@ import Posts from "./components/posts/posts";
 import Statistics from "./components/statistics/statistics";
 import {useState} from "react";
 import LoginForm from "./components/loginform/loginform";
-import {LoginContext} from "./context/context";
+import {LoginContext, PostsContext} from "./context/context";
 
 const App = () => {
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [posts, setPosts]       = useState([]);
 
   return (
       <LoginContext.Provider value={{loggedIn, setLoggedIn}}>
@@ -35,11 +36,13 @@ const App = () => {
             </div>
           </Grid>
           <Grid item xs={6} style={{margin: '20px'}}>
-            <Routes>
-              <Route exact path='/' element={<Posts/>}/>
-              <Route path='/posts' element={<Posts/>}/>
-              <Route path='/statistics' element={<Statistics/>}/>
-            </Routes>
+              <PostsContext.Provider value={{posts, setPosts}}>
+                <Routes>
+                      <Route exact path='/' element={<Posts/>}/>
+                      <Route path='/posts' element={<Posts/>}/>
+                      <Route path='/statistics' element={<Statistics/>}/>
+                </Routes>
+              </PostsContext.Provider>
           </Grid>
         </Grid>
       </Router>

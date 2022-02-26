@@ -14,6 +14,16 @@ const schema = buildSchema(`
         name: String
     } 
     
+    type Post
+    {
+        id: ID
+        from_name: String
+        from_id: String
+        message: String
+        type: String
+        created_time: String
+    }
+    
     type Consent
     {
         id: ID
@@ -33,12 +43,6 @@ const schema = buildSchema(`
         age: Int
         posts: [Post]
     }    
-    type Post
-    {
-        id: ID
-        title: String
-        content: String
-    }
     input UserInput
     {
         id: ID
@@ -54,8 +58,9 @@ const schema = buildSchema(`
     }
     
     type Query
-    {        
-        getAllUsers: [User]
+    {       
+        fetchSupermetricsPosts: [Post] 
+        generateRandomPosts: [Post] 
         getUser(id: ID): User
     }
     

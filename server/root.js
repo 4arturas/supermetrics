@@ -1,4 +1,5 @@
 const supermetricsAPI   = require("./supermetricsAPI");
+const randomPosts       = require("./randomPosts");
 
 const users = [
     { id: 1, username: 'TestUser', age: 33 }
@@ -27,10 +28,19 @@ const root = {
         return 1;
     },
 
-    getAllUsers: () =>
+    fetchSupermetricsPosts: () =>
     {
-        return users;
+        console.log( 'fetchSupermetricsPosts' );
+        const posts = randomPosts.generateRandomPosts();
+        return posts;
     },
+    generateRandomPosts: () =>
+    {
+        console.log( 'generateRandomPosts' );
+        const posts = randomPosts.generateRandomPosts();
+        return posts;
+    },
+
     getUser: ({id}) =>
     {
         return users.find( (user) => user.id === id );

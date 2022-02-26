@@ -1,9 +1,17 @@
 import { gql } from '@apollo/client';
 
-export const GET_ALL_USERS = gql`
+export const FETCH_SUPERMETRICS_POSTS = gql`
     query {
-        getAllUsers {
-            id, username, age
+        fetchSupermetricsPosts {
+            id, from_name, from_id, message, type, created_time
+        }
+    }
+`;
+
+export const GENERATE_RANDOM_POSTS = gql`
+    query {
+        generateRandomPosts {
+            id, from_name, from_id, message, type, created_time
         }
     }
 `;
