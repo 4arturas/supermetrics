@@ -16,7 +16,7 @@ const App = () => {
   const [logged, setLogged] = useState(false);
 
   if ( !logged )
-    return <LoginForm/>
+    return <Grid container justifyContent="center"><LoginForm/></Grid>
 
   return (
       <Router>

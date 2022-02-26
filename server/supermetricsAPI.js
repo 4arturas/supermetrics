@@ -7,10 +7,10 @@ async function connectToSupermetricsAPI( client_id, email, name ) {
             email: email,
             name: name
         });
-        return { status: response.status, data: response.data.data };
+        return { status: response.status, statusText: null, data: response.data.data };
     } catch (error) {
         console.error(error);
-        return { status: error.response.status, statusText: error.response.statusText };
+        return { status: error.response.status, statusText: error.response.statusText, data: null };
     }
 }
 

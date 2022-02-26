@@ -2,6 +2,8 @@ import {TextValidator, ValidatorForm} from "react-material-ui-form-validator";
 import Button from "@mui/material/Button";
 import {Alert, CircularProgress} from "@mui/material";
 import {useState} from "react";
+import {useMutation} from "@apollo/client";
+import {LOGIN_USER} from "../../mutation/user";
 
 function LoginForm() {
     const [submitted, setSubmitted]     = useState(false);
@@ -11,14 +13,30 @@ function LoginForm() {
     const [name, setName] = useState( 'Your Name' );
 
     const [success, setSuccess]         = useState( false );
-    const [error, setError]             = useState( null );
+    // const [error, setError]             = useState( null );
+
+
+    const [loginUser, { data, loading, error }]                 = useMutation(LOGIN_USER);
 
     const handleChange = (event) => {
 
     }
 
     const handleSubmit = (event) => {
-
+        event.preventDefault()
+        loginUser({
+            variables: {
+                input: {
+                    client_id: clientid, email: email, name: name
+                }
+            }
+        }).then(({data}) => {
+            console.log(data)
+        }).catch( (e) => {
+            console.log( e );
+        })
+        setSubmitted( true );
+        setTimeout( ()=> setSubmitted( false ), 5000 );
     }
 
     return (

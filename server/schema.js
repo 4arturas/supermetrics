@@ -1,6 +1,19 @@
 const { buildSchema } = require('graphql');
 
 const schema = buildSchema(`
+    type LoginUser
+    {
+        status: String
+        statusText: String 
+        sl_token: String   
+    }
+    input LoginInput
+    {
+        client_id: String
+        email: String
+        name: String
+    } 
+    
     type Consent
     {
         id: ID
@@ -41,13 +54,14 @@ const schema = buildSchema(`
     }
     
     type Query
-    {
+    {        
         getAllUsers: [User]
         getUser(id: ID): User
     }
     
     type Mutation 
     {
+        loginUser(input: LoginInput): LoginUser
         giveConsent(input: ConsentInput): Consent
         createUser(input: UserInput): User
         testMutation(input: UserInput): Int

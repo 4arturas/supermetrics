@@ -1,3 +1,5 @@
+const supermetricsAPI   = require("./supermetricsAPI");
+
 const users = [
     { id: 1, username: 'TestUser', age: 33 }
 ];
@@ -7,6 +9,13 @@ const consents = [
 ];
 
 const root = {
+    loginUser: async ({input}) =>
+    {
+        const response = await supermetricsAPI.connectToSupermetricsAPI( input.client_id, input.email,  input.name );
+        console.log( response );
+        return { status: response.status, statusText: response.statusText, sl_token: response.data.sl_token };
+    },
+
     giveConsent: ({input}) =>
     {
         const id = Date.now();
