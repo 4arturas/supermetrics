@@ -9,7 +9,6 @@ import { styled } from '@mui/material/styles';
 import MuiGrid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import {CircularProgress} from "@mui/material";
-import {setContext} from "@apollo/client/link/context";
 
 const Grid = styled(MuiGrid)(({ theme }) => ({
     width: '100%',
@@ -21,14 +20,14 @@ const Grid = styled(MuiGrid)(({ theme }) => ({
 
 function Posts() {
 
-    const {contextData, setContextData}         = useContext(LoginContext);
-    const {posts, setPosts}                     = useContext(PostsContext);
-    const [data, setData] = useState(null);
+    const {sltoken}                     = useContext(LoginContext);
+    const {posts, setPosts}                    = useContext(PostsContext);
+    const [data, setData]               = useState(null);
     const [loadingData, setLoadingData] = useState( false );
 
 
     const [fetchSupermetrics, { called: supermetricsCalled, loading: supermetricsLoading, data: supermetricsData }] =
-        useLazyQuery( FETCH_SUPERMETRICS_POSTS, { variables: { sl_token: contextData.sl_token } } );
+        useLazyQuery( FETCH_SUPERMETRICS_POSTS, { variables: { sl_token: sltoken } } );
 
     const [randomPosts, { called: randomCalled, loading: randomLoading, data: randomData }] = useLazyQuery( GENERATE_RANDOM_POSTS );
 
@@ -36,7 +35,6 @@ function Posts() {
         event.preventDefault();
         setLoadingData(true);
         setData( null );
-        setContextData( { sl_token: contextData.sl_token, posts: [] } );
         setPosts( null );
         fetchSupermetrics();
     }
@@ -45,12 +43,11 @@ function Posts() {
         event.preventDefault();
         setLoadingData( true );
         setData( null );
-        setContextData( { sl_token: contextData.sl_token, posts: [] } );
         setPosts( null );
         randomPosts();
     }
 
-    if ( !contextData.sl_token )
+    if ( !sltoken )
         return <Unauthorized/>
 
     if ( supermetricsData && supermetricsData.fetchSupermetricsPosts )
@@ -100,7 +97,7 @@ function Posts() {
                 </Grid>
                 <Grid item xs={12}><br/>
                     { loadingData && <CircularProgress color="primary" /> }
-                    { data && <EnhancedTable rows={data}/>}
+                    { posts && <EnhancedTable rows={posts}/>}
                 </Grid>
             </Grid>
                 {/*{data && data.map((c, i) => <div key={i}>{c.id} - {c.from_name}</div>)}*/}

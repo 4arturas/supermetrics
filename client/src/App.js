@@ -14,16 +14,16 @@ import {LoginContext, PostsContext} from "./context/context";
 
 const App = () => {
 
-  const [contextData, setContextData]   = useState({sl_token: null, posts: []});
+  const [sltoken, setSltoken]   = useState(null);
   const [posts, setPosts]   = useState(null );
     const valueMemo = useMemo(
-        () => ({ contextData, setContextData }),
-        [contextData]
+        () => ({ sltoken, setSltoken }),
+        [sltoken]
     );
 
   return (
-      <LoginContext.Provider value={{contextData, setContextData}}>
-      { !contextData.sl_token ?
+      <LoginContext.Provider value={{sltoken, setSltoken}}>
+      { !sltoken ?
       <Grid container justifyContent="center"><LoginForm/></Grid> :
       <Router>
         <Grid container justifyContent="center">

@@ -8,7 +8,7 @@ import {LoginContext} from "../../context/context";
 
 function LoginForm() {
 
-    const {contextData, setContextData} = useContext(LoginContext);
+    const {sltoken, setSltoken} = useContext(LoginContext);
 
     const createFormData = ( clientid, email, name ) => {
         return { clientid: clientid, email: email, name: name };
@@ -33,13 +33,13 @@ function LoginForm() {
             }
         }).then(({data}) => {
             const status = data.status;
-            setContextData( { sl_token: data.loginUser.sl_token, posts: [] } );
+            setSltoken( data.loginUser.sl_token );
         }).catch( (e) => {
             console.log( e );
         })
     }
 
-    if ( contextData.sl_token )
+    if ( sltoken )
         return <div></div>
 
     return (

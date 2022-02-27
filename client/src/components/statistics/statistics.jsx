@@ -5,12 +5,15 @@ import BarChart from './BarChart';
 import moment from "moment";
 
 function Statistics() {
-    const {contextData} = useContext(LoginContext);
-    const {posts}       = useContext(PostsContext);
-    if ( !contextData.sl_token )
+
+    const {sltoken} = useContext(LoginContext);
+    const {posts}   = useContext(PostsContext);
+
+    if ( !sltoken )
         return <Unauthorized/>
 
-    console.log( posts );
+    if ( !posts )
+        return <div>No data, please load data</div>
 
     return <div>
         <h3>Statistics</h3>
