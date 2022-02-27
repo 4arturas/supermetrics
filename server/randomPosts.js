@@ -45,7 +45,7 @@ function generateRandomPosts()
         const randomSentencesNumber     = getRandomInt( 1, 5 );
         const message                   = lorem.generateSentences(randomSentencesNumber);
         const randomDate                = moment(new Date(+(new Date()) - Math.floor(Math.random()*100000000000))).format('YYYY-MM-DD[T]HH:mm:ss');
-        const post                      = createPost( 'post'+postId, randomUser.from_id, randomUser.from_name, message,'status', randomDate );
+        const post                      = createPost( 'post'+postId, randomUser.from_name, randomUser.from_id, message,'status', randomDate );
         randomPosts.push( post );
     } // end for postId
     return randomPosts;
