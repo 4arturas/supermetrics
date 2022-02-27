@@ -20,17 +20,17 @@ const Grid = styled(MuiGrid)(({ theme }) => ({
 
 function Posts() {
 
-    const {loggedIn}        = useContext(LoginContext);
+    const {sltoken}        = useContext(LoginContext);
     const {posts, setPosts} = useContext(PostsContext);
     const [data, setData] = useState(null);
     const [loadingData, setLoadingData] = useState( false );
 
     const [fetchSupermetrics, { called: supermetricsCalled, loading: supermetricsLoading, data: supermetricsData }] =
-        useLazyQuery( FETCH_SUPERMETRICS_POSTS, { variables: { sl_token: loggedIn } } );
+        useLazyQuery( FETCH_SUPERMETRICS_POSTS, { variables: { sl_token: sltoken } } );
 
     const [randomPosts, { called: randomCalled, loading: randomLoading, data: randomData }] = useLazyQuery( GENERATE_RANDOM_POSTS );
 
-    if ( !loggedIn )
+    if ( !sltoken )
         return <Unauthorized/>
 
     if ( supermetricsData && supermetricsData.fetchSupermetricsPosts )
