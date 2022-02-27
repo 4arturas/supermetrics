@@ -14,12 +14,12 @@ import {LoginContext, PostsContext} from "./context/context";
 
 const App = () => {
 
-  const [sltoken, setSltoken]   = useState(null);
+  const [contextData, setContextData]   = useState(null);
   const [posts, setPosts]       = useState(null );
 
   return (
-      <LoginContext.Provider value={{sltoken, setSltoken}}>
-      { !sltoken ?
+      <LoginContext.Provider value={{contextData, setContextData}}>
+      { !contextData ?
       <Grid container justifyContent="center"><LoginForm/></Grid> :
       <Router>
         <Grid container justifyContent="center">
