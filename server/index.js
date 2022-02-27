@@ -46,7 +46,7 @@ function supermetricsTaskImplementation() {
 
     // a. - Average character length of posts per month
     console.log('#########################################################################');
-    const average = statistics.calculateAverageCharactersLengthOfPostsPerMonth( posts );
+    const average = statistics.averageCharactersLengthOfPostsPerMonth( posts );
     console.log( 'Average character length of posts per month', average );
 
     // b. - Longest post by character length per month

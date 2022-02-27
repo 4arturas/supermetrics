@@ -1,7 +1,7 @@
 const moment = require("moment");
 
 /* Average character length of posts per month */
-function calculateAverageCharactersLengthOfPostsPerMonth(posts )
+function averageCharactersLengthOfPostsPerMonth(posts )
 {
     let totalLength = 0;
     for ( let i = 0; i < posts.length; i++ )
@@ -88,7 +88,7 @@ function averageNumberOfPostsPerUserPerMonth( posts )
 }
 
 module.exports = {
-    calculateAverageCharactersLengthOfPostsPerMonth,
+    averageCharactersLengthOfPostsPerMonth,
     longestPostByCharacterLengthPerMonth,
     totalPostsSplitByWeekNumber,
     averageNumberOfPostsPerUserPerMonth
