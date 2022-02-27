@@ -28,10 +28,16 @@ const root = {
         return 1;
     },
 
-    fetchSupermetricsPosts: () =>
+    fetchSupermetricsPosts: async ({sl_token}) =>
     {
-        console.log( 'fetchSupermetricsPosts' );
-        const posts = randomPosts.generateRandomPosts();
+        console.log( 'fetchSupermetricsPosts', sl_token );
+        const posts = [];
+        for ( let i = 1; i <= 10; i++ )
+        {
+            const supermetricsData = await supermetricsAPI.getDataFromSupermetricsAPI( sl_token, i );
+            const p = supermetricsData.data.posts;
+            posts.push( ...p );
+        }
         return posts;
     },
     generateRandomPosts: () =>
@@ -43,6 +49,7 @@ const root = {
 
     getUser: ({id}) =>
     {
+        // return users[0];
         return users.find( (user) => user.id === id );
     },
     createUser: ({input}) =>

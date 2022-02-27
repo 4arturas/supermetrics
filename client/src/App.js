@@ -14,7 +14,7 @@ import {LoginContext, PostsContext} from "./context/context";
 
 const App = () => {
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(null);
   const [posts, setPosts]       = useState(null );
 
   return (

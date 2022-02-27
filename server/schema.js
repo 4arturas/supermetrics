@@ -59,7 +59,7 @@ const schema = buildSchema(`
     
     type Query
     {       
-        fetchSupermetricsPosts: [Post] 
+        fetchSupermetricsPosts(sl_token: String): [Post] 
         generateRandomPosts: [Post] 
         getUser(id: ID): User
     }

@@ -1,12 +1,14 @@
 import { gql } from '@apollo/client';
 
 export const FETCH_SUPERMETRICS_POSTS = gql`
-    query {
-        fetchSupermetricsPosts {
-            id, from_name, from_id, message, type, created_time
-        }
+    query FetchPosts($sl_token: String) 
+    { 
+        fetchSupermetricsPosts(sl_token: $sl_token) 
+        {
+            id, from_name, from_id, message, type, created_time 
+        } 
     }
-`;
+    `;
 
 export const GENERATE_RANDOM_POSTS = gql`
     query {

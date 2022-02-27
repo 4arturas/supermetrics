@@ -32,9 +32,8 @@ function LoginForm() {
                 }
             }
         }).then(({data}) => {
-            console.log(data);
             const status = data.status;
-            setLoggedIn( true );
+            setLoggedIn( data.loginUser.sl_token );
         }).catch( (e) => {
             console.log( e );
         })
