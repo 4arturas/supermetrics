@@ -10,11 +10,12 @@ import Posts from "./components/posts/posts";
 import Statistics from "./components/statistics/statistics";
 import {useMemo, useState} from "react";
 import LoginForm from "./components/loginform/loginform";
-import {LoginContext} from "./context/context";
+import {LoginContext, PostsContext} from "./context/context";
 
 const App = () => {
 
   const [contextData, setContextData]   = useState({sl_token: null, posts: []});
+  const [posts, setPosts]   = useState(null );
     const valueMemo = useMemo(
         () => ({ contextData, setContextData }),
         [contextData]
@@ -39,11 +40,13 @@ const App = () => {
             </div>
           </Grid>
           <Grid item xs={6} style={{margin: '20px'}}>
+            <PostsContext.Provider value={{posts, setPosts}}>
             <Routes>
               <Route exact path='/' element={<Posts/>}/>
               <Route path='/posts' element={<Posts/>}/>
               <Route path='/statistics' element={<Statistics/>}/>
             </Routes>
+            </PostsContext.Provider>
           </Grid>
         </Grid>
       </Router>

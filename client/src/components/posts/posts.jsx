@@ -1,5 +1,5 @@
 import {useContext, useState} from "react";
-import {LoginContext} from "../../context/context";
+import {LoginContext, PostsContext} from "../../context/context";
 import Unauthorized from "../loginform/unauthorized";
 import Button from "@mui/material/Button";
 import {gql, useLazyQuery} from "@apollo/client";
@@ -21,7 +21,8 @@ const Grid = styled(MuiGrid)(({ theme }) => ({
 
 function Posts() {
 
-    const {contextData, setContextData}        = useContext(LoginContext);
+    const {contextData, setContextData}         = useContext(LoginContext);
+    const {posts, setPosts}                     = useContext(PostsContext);
     const [data, setData] = useState(null);
     const [loadingData, setLoadingData] = useState( false );
 
@@ -36,6 +37,7 @@ function Posts() {
         setLoadingData(true);
         setData( null );
         setContextData( { sl_token: contextData.sl_token, posts: [] } );
+        setPosts( null );
         fetchSupermetrics();
     }
 
@@ -44,6 +46,7 @@ function Posts() {
         setLoadingData( true );
         setData( null );
         setContextData( { sl_token: contextData.sl_token, posts: [] } );
+        setPosts( null );
         randomPosts();
     }
 
@@ -55,7 +58,7 @@ function Posts() {
         if ( !data )
         {
             const p = supermetricsData.fetchSupermetricsPosts;
-            setTimeout( () => setContextData( { sl_token: contextData.sl_token, posts: p } ), 0 );
+            setTimeout( () => setPosts( p ), 0 );
             setData( p );
             setLoadingData( false );
         }
@@ -66,7 +69,7 @@ function Posts() {
         if ( !data )
         {
             const p = randomData.generateRandomPosts;
-            setTimeout( () => setContextData( { sl_token: contextData.sl_token, posts: p } ), 0 );
+            setTimeout( () => setPosts( p ), 0 );
             setData( p );
             setLoadingData( false );
         }
