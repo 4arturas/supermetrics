@@ -33,13 +33,13 @@ function LoginForm() {
             }
         }).then(({data}) => {
             const status = data.status;
-            setContextData( data.loginUser.sl_token );
+            setContextData( { sl_token: data.loginUser.sl_token, posts: [] } );
         }).catch( (e) => {
             console.log( e );
         })
     }
 
-    if ( contextData )
+    if ( contextData.sl_token )
         return <div></div>
 
     return (

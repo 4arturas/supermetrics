@@ -38,7 +38,7 @@ function generateRandomPosts()
     } // end for i
 
     const randomPosts = [];
-    for ( let postId = 0; postId < 10; postId++ )
+    for ( let postId = 0; postId < 1000; postId++ )
     {
         const randomUserId              = getRandomInt( 0 , randomUsersNumber );
         const randomUser                = randomUsersArray[randomUserId];
