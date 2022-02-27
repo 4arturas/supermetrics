@@ -16,10 +16,6 @@ const App = () => {
 
   const [sltoken, setSltoken]   = useState(null);
   const [posts, setPosts]   = useState(null );
-    const valueMemo = useMemo(
-        () => ({ sltoken, setSltoken }),
-        [sltoken]
-    );
 
   return (
       <LoginContext.Provider value={{sltoken, setSltoken}}>
