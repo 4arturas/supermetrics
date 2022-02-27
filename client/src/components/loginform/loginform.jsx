@@ -1,6 +1,6 @@
 import {TextValidator, ValidatorForm} from "react-material-ui-form-validator";
 import Button from "@mui/material/Button";
-import {Alert, CircularProgress} from "@mui/material";
+import {CircularProgress} from "@mui/material";
 import {useContext, useState} from "react";
 import {useMutation} from "@apollo/client";
 import {LOGIN_USER} from "../../mutation/user";
