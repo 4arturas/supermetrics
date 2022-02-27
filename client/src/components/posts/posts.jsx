@@ -17,11 +17,16 @@ const Grid = styled(MuiGrid)(({ theme }) => ({
     },
 }));
 
+function Spinner() {
+    return null;
+}
+
 function Posts() {
 
     const {loggedIn}        = useContext(LoginContext);
     const {posts, setPosts} = useContext(PostsContext);
     const [data, setData] = useState(null);
+    const [loadingData, setLoadingData] = useState( false );
 
     const [fetchSupermetrics, { called: supermetricsCalled, loading: supermetricsLoading, data: supermetricsData }] = useLazyQuery( FETCH_SUPERMETRICS_POSTS );
     const [randomPosts, { called: randomCalled, loading: randomLoading, data: randomData }]                         = useLazyQuery( GENERATE_RANDOM_POSTS );
@@ -32,27 +37,34 @@ function Posts() {
     if ( supermetricsData && supermetricsData.fetchSupermetricsPosts )
     {
         if ( !data )
+        {
             setData( supermetricsData.fetchSupermetricsPosts );
+            setLoadingData( false );
+        }
     }
 
     if ( randomData && randomData.generateRandomPosts )
     {
         if ( !data )
+        {
             setData( randomData.generateRandomPosts );
+            setLoadingData( false );
+        }
     }
 
     return <div>
             <h3>Posts</h3>
             <Grid container>
                 <Grid item xs>
-                    <div><Button color="primary" variant="contained" type="submit" onClick={ () => { setData( null ); fetchSupermetrics(); } } disabled={supermetricsLoading}>Fetch</Button> Supermetrics data</div>
+                    <div><Button color="primary" variant="contained" type="submit" onClick={ () => { setLoadingData(true); setData( null ); fetchSupermetrics(); } } disabled={loadingData}>Fetch</Button> Supermetrics data</div>
                 </Grid>
                 <Divider orientation="vertical" flexItem>
                 </Divider>
                 <Grid item xs>
-                    <div style={{textAlign:"right"}}><Button color="primary" variant="contained" type="submit" onClick={ () => { setData( null ); randomPosts(); } } disabled={randomLoading}>Generate</Button> random data</div>
+                    <div style={{textAlign:"right"}}><Button color="primary" variant="contained" type="submit" onClick={ () => { setLoadingData( true ); setData( null ); randomPosts(); } } disabled={loadingData}>Generate</Button> random data</div>
                 </Grid>
                 <Grid item xs={12}><br/>
+                    { loadingData && <Spinner/> }
                     {data && <EnhancedTable rows={data}/>}
                 </Grid>
             </Grid>
