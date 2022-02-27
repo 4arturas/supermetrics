@@ -5,48 +5,42 @@ import Button from "@mui/material/Button";
 import {useLazyQuery} from "@apollo/client";
 import {FETCH_SUPERMETRICS_POSTS, GENERATE_RANDOM_POSTS} from "../../query/user";
 
+function ShowData( { data } )
+{
+
+}
+
 function Posts() {
 
     const {loggedIn}        = useContext(LoginContext);
     const {posts, setPosts} = useContext(PostsContext);
+    const [data, setData] = useState(null);
 
     const [fetchSupermetrics, { called: supermetricsCalled, loading: supermetricsLoading, data: supermetricsData }] = useLazyQuery( FETCH_SUPERMETRICS_POSTS );
     const [randomPosts, { called: randomCalled, loading: randomLoading, data: randomData }]                         = useLazyQuery( GENERATE_RANDOM_POSTS );
 
-    const [data, setData] = useState( null );
-
-
     if ( !loggedIn )
         return <Unauthorized/>
 
-/*    if (called && loading) return <p>Loading ...</p>
-    if (!called) {
-        return <button onClick={() => fetchSupermetrics()}>Load greeting</button>
-    }*/
-
-/*
-    if (supermetricsData && supermetricsData.fetchSupermetricsPosts) {
-        // console.log(supermetricsData.fetchSupermetricsPosts);
-        // setPosts( supermetricsData.fetchSupermetricsPosts );
-        const d = supermetricsData.fetchSupermetricsPosts;
-        setData( d );
-        // setData(  );
+    if ( supermetricsData && supermetricsData.fetchSupermetricsPosts )
+    {
+        if ( !data )
+            setData( supermetricsData.fetchSupermetricsPosts );
     }
 
-    if (randomData?.generateRandomPosts) {
-        console.log(randomData.generateRandomPosts);
-        // setPosts( randomData.generateRandomPosts );
+    if ( randomData && randomData.generateRandomPosts )
+    {
+        if ( !data )
+            setData( randomData.generateRandomPosts );
     }
-*/
+
 
     return <div>
                 <h3>Posts</h3>
-                <Button color="primary" variant="contained" type="submit" onClick={ () => { fetchSupermetrics(); } } disabled={supermetricsLoading}>Fetch</Button> Supermetrics data
+                <Button color="primary" variant="contained" type="submit" onClick={ () => { setData( null ); fetchSupermetrics(); } } disabled={supermetricsLoading}>Fetch</Button> Supermetrics data
                 <br/><br/>
-                <Button color="primary" variant="contained" type="submit" onClick={ () => { randomPosts() } } disabled={randomLoading}>Generate</Button> random data<br/>
-                {supermetricsData &&
-                supermetricsData.fetchSupermetricsPosts &&
-                supermetricsData.fetchSupermetricsPosts.map((c, i) => <div key={i}>{c.id}</div>)}
+                <Button color="primary" variant="contained" type="submit" onClick={ () => { setData( null ); randomPosts() } } disabled={randomLoading}>Generate</Button> random data<br/>
+                {data && data.map((c, i) => <div key={i}>{c.id} - {c.from_name}</div>)}
             </div>
 }
 

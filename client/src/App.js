@@ -15,7 +15,7 @@ import {LoginContext, PostsContext} from "./context/context";
 const App = () => {
 
   const [loggedIn, setLoggedIn] = useState(false);
-  const [posts, setPosts]       = useState([]);
+  const [posts, setPosts]       = useState(null );
 
   return (
       <LoginContext.Provider value={{loggedIn, setLoggedIn}}>
@@ -38,9 +38,9 @@ const App = () => {
           <Grid item xs={6} style={{margin: '20px'}}>
               <PostsContext.Provider value={{posts, setPosts}}>
                 <Routes>
-                      <Route exact path='/' element={<Posts/>}/>
-                      <Route path='/posts' element={<Posts/>}/>
-                      <Route path='/statistics' element={<Statistics/>}/>
+                  <Route exact path='/' element={<Posts/>}/>
+                  <Route path='/posts' element={<Posts/>}/>
+                  <Route path='/statistics' element={<Statistics/>}/>
                 </Routes>
               </PostsContext.Provider>
           </Grid>
