@@ -1,6 +1,6 @@
-/* Average character length of posts per month */
 const moment = require("moment");
 
+/* Average character length of posts per month */
 function calculateAverageCharactersLengthOfPostsPerMonth(posts )
 {
     let totalLength = 0;
