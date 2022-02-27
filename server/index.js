@@ -35,7 +35,7 @@ async function saveSupermetricsDataToJSONFile() {
         console.log(data);
     });
 }
-// saveSupermetricsDataToJSONFile();
+saveSupermetricsDataToJSONFile();
 
 function supermetricsTaskImplementation() {
     const postsRawdata = fs.readFileSync(jsonFilePath);
