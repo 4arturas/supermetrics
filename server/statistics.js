@@ -1,7 +1,7 @@
 const moment = require("moment");
 
 /* Average character length of posts per month */
-function averageCharactersLengthOfPostsPerMonth(posts )
+function averageCharactersLengthOfPostsPerMonth( posts )
 {
     const months = {};
     for ( let i = 0; i < posts.length; i++ )
@@ -21,7 +21,7 @@ function averageCharactersLengthOfPostsPerMonth(posts )
         const monthData = months[month];
         const avg = { month: month, averageCharacterLength: monthData.totalMessagesLength/monthData.messageCount };
         averages.push( avg );
-    }
+    } // end for i
     return averages;
 }
 
