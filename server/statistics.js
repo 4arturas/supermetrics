@@ -93,7 +93,27 @@ function totalPostsSplitByWeekNumber( posts )
             weeksHashTable[keyYearWeekNumber] = 0;
         weeksHashTable[keyYearWeekNumber]++;
     } );
-    return weeksHashTable;
+    const weeksArray = [];
+    const weekKeys =  Object.keys(weeksHashTable);
+    for ( let i = 0; i < weekKeys.length; i++ )
+    {
+        const week = weekKeys[i];
+        const weekJson = { week: week, messagesCount: weeksHashTable[week] };
+        weeksArray.push( weekJson );
+    } // end for i
+    return weeksArray;
+}
+function totalPostsSplitByWeekNumberSQL( posts )
+{
+    alasql.fn.converteCreatedTimeToYYYYWeek = function(created_time) {
+        const date = moment(created_time, 'YYYY-MM-DD[T]HH:mm:ss');
+        const year = date.year();
+        const weekNumber = date.week();
+        return year + '-' + weekNumber;
+    };
+    let ret = alasql('SELECT message, converteCreatedTimeToYYYYWeek(created_time) as week FROM ?', [posts]);
+    ret = alasql( 'SELECT week, count(message) AS messagesCount FROM ? GROUP BY week ORDER BY week', [ret] );
+    return ret;
 }
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -144,5 +164,6 @@ module.exports = {
     longestPostByCharacterLengthPerMonth,
     longestPostByCharacterLengthPerMonthSQL,
     totalPostsSplitByWeekNumber,
+    totalPostsSplitByWeekNumberSQL,
     averageNumberOfPostsPerUserPerMonth
 };
