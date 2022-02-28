@@ -84,11 +84,14 @@ function totalPostsSplitByWeekNumber( posts )
     posts.map( post => {
 
         const created_time = post.created_time;
-        const weekNumber = moment(created_time, "YYYY-MM-DD[T]HH:mm:ss").week();
-        const weekExistsInHashTable = weeksHashTable[weekNumber];
+        const date = moment(created_time, 'YYYY-MM-DD[T]HH:mm:ss');
+        const year = date.year();
+        const weekNumber = date.week();
+        const keyYearWeekNumber = year + '-' + weekNumber;
+        const weekExistsInHashTable = weeksHashTable[keyYearWeekNumber];
         if ( !weekExistsInHashTable )
-            weeksHashTable[weekNumber] = 0;
-        weeksHashTable[weekNumber]++;
+            weeksHashTable[keyYearWeekNumber] = 0;
+        weeksHashTable[keyYearWeekNumber]++;
     } );
     return weeksHashTable;
 }
