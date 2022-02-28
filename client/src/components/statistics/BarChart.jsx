@@ -14,13 +14,13 @@ function BarChart({ data }) {
             const margin = { top: 20, right: 30, bottom: 30, left: 40 };
             const x = d3
                 .scaleBand()
-                .domain(data.map((d) => d.year))
+                .domain(data.map((d) => d.xxx))
                 .rangeRound([margin.left, width - margin.right])
                 .padding(0.1);
 
             const y1 = d3
                 .scaleLinear()
-                .domain([0, d3.max(data, (d) => d.sales)])
+                .domain([0, d3.max(data, (d) => d.yyy)])
                 .rangeRound([height - margin.bottom, margin.top]);
 
             const xAxis = (g) =>
@@ -63,10 +63,10 @@ function BarChart({ data }) {
                 .data(data)
                 .join("rect")
                 .attr("class", "bar")
-                .attr("x", (d) => x(d.year))
+                .attr("x", (d) => x(d.xxx))
                 .attr("width", x.bandwidth())
-                .attr("y", (d) => y1(d.sales))
-                .attr("height", (d) => y1(0) - y1(d.sales));
+                .attr("y", (d) => y1(d.yyy))
+                .attr("height", (d) => y1(0) - y1(d.yyy));
         },
 
         [data.length]
