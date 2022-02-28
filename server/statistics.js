@@ -3,16 +3,26 @@ const moment = require("moment");
 /* Average character length of posts per month */
 function averageCharactersLengthOfPostsPerMonth(posts )
 {
-    let totalLength = 0;
+    const months = {};
     for ( let i = 0; i < posts.length; i++ )
     {
         const post              = posts[i];
-        const message           = post.message;
-        const messageLength     = message.length;
-        totalLength             += messageLength;
+        const month             = moment(post.created_time).format(`YYYY-MM`);
+        if ( !months[month] )
+            months[month] = {messageCount: 0, totalMessagesLength: 0 };
+        months[month].messageCount++;
+        months[month].totalMessagesLength += post.message.length;
     } // end for i
-    const average               = totalLength / posts.length;
-    return average;
+    const averages = [];
+    const monthNameArray =  Object.keys(months);
+    for ( let i = 0; i < monthNameArray.length; i++ )
+    {
+        const month = monthNameArray[i];
+        const monthData = months[month];
+        const avg = { month: month, averageCharacterLength: monthData.totalMessagesLength/monthData.messageCount };
+        averages.push( avg );
+    }
+    return averages;
 }
 
 /* Longest post by character length per month */
