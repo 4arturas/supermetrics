@@ -1,6 +1,8 @@
 const supermetricsAPI   = require("./supermetricsAPI");
 const randomPosts       = require("./randomPosts");
 
+let postsDB = [];
+
 const users = [
     { id: 1, username: 'TestUser', age: 33 }
 ];
@@ -38,12 +40,14 @@ const root = {
             const p = supermetricsData.data.posts;
             posts.push( ...p );
         }
+        postsDB = posts;
         return posts;
     },
     generateRandomPosts: () =>
     {
         console.log( 'generateRandomPosts' );
         const posts = randomPosts.generateRandomPosts();
+        postsDB = posts;
         return posts;
     },
 
