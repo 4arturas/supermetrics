@@ -69,12 +69,19 @@ const schema = buildSchema(`
         longestMessage: String   
     }
     
+    type TotalPostsSplitByWeekNumber
+    {
+        week: String
+        messagesCount: Int 
+    }
+    
     type Query
     {       
         fetchSupermetricsPosts(sl_token: String): [Post] 
         generateRandomPosts: [Post] 
         averageCharactersLengthOfPostsPerMonth: [AverageCharacterLengthOfPostsPerMonth] 
         longestPostByCharacterLengthPerMonth: [LongestPostByCharacterLengthPerMonth] 
+        totalPostsSplitByWeekNumber: [TotalPostsSplitByWeekNumber] 
         getUser(id: ID): User
     }
     

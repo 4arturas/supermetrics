@@ -59,6 +59,10 @@ const root = {
     {
         return statistics.longestPostByCharacterLengthPerMonthSQL( postsDB );
     },
+    totalPostsSplitByWeekNumber: () =>
+    {
+        return statistics.totalPostsSplitByWeekNumberSQL( postsDB );
+    },
 
     getUser: ({id}) =>
     {
