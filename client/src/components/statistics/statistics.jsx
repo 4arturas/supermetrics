@@ -87,6 +87,16 @@ function Statistics() {
 
     }
 
+    const displayDataInTable = ( containerId, xLabel, yLabel, data ) =>
+    {
+        let table = `<table><tr><th>${xLabel}</th><th>${yLabel}</th></tr>`+data.flatMap( d => `<tr><td>${d.xxx}</td><td>${d.yyy}</td></tr>`) + '</table>';
+        const div = document.createElement('div');
+        div.innerHTML = table;
+        const container = document.getElementById(containerId);
+        container.innerHTML = '';
+        container.appendChild( div.firstChild );
+    }
+
     useEffect(() => {
 
         if (!loadingAverageDataQQL)
