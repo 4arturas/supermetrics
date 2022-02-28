@@ -63,6 +63,10 @@ const root = {
     {
         return statistics.totalPostsSplitByWeekNumberSQL( postsDB );
     },
+    averageNumberOfPostsPerUserPerMonth: () =>
+    {
+        return statistics.averageNumberOfPostsPerUserPerMonthSQL( postsDB );
+    },
 
     getUser: ({id}) =>
     {

@@ -75,6 +75,12 @@ const schema = buildSchema(`
         messagesCount: Int 
     }
     
+    type AverageNumberOfPostsPerUserPerMonth
+    {
+        from_id: String  
+        averagePerMonth: String    
+    }
+    
     type Query
     {       
         fetchSupermetricsPosts(sl_token: String): [Post] 
@@ -82,6 +88,7 @@ const schema = buildSchema(`
         averageCharactersLengthOfPostsPerMonth: [AverageCharacterLengthOfPostsPerMonth] 
         longestPostByCharacterLengthPerMonth: [LongestPostByCharacterLengthPerMonth] 
         totalPostsSplitByWeekNumber: [TotalPostsSplitByWeekNumber] 
+        averageNumberOfPostsPerUserPerMonth: [AverageNumberOfPostsPerUserPerMonth] 
         getUser(id: ID): User
     }
     

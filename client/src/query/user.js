@@ -18,7 +18,7 @@ export const GENERATE_RANDOM_POSTS = gql`
     }
 `;
 
-export const AVERAGE_CHARACTERS_LENGTH_OR_POSTS_PER_MONTH = gql`
+export const AVERAGE_CHARACTERS_LENGTH_OF_POSTS_PER_MONTH = gql`
     query { averageCharactersLengthOfPostsPerMonth { month,  averageCharacterLength} }
 `;
 
@@ -28,6 +28,10 @@ export const LONGEST_POST_BY_CHARACTER_LENGTH_PER_MMONTH = gql`
 
 export const TOTAL_LONGEST_POST_BY_CHARACTER_LENGTH_PER_MONTH = gql`
     query { totalPostsSplitByWeekNumber { week,  messagesCount} }
+`;
+
+export const AVERAGE_NUMBER_OF_POSTS_PER_USER_PER_MONTH = gql`
+    query { averageNumberOfPostsPerUserPerMonth { from_id,  averagePerMonth } }
 `;
 
 export const GET_ONE_USER = gql`
