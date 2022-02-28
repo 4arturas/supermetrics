@@ -44,15 +44,25 @@ function averageCharactersLengthOfPostsPerMonthSQL( posts )
 /* Longest post by character length per month */
 function longestPostByCharacterLengthPerMonth( posts )
 {
-    let longestMessage = -1;
-    posts.map( post =>
+    const months = {};
+    for ( let i = 0; i < posts.length; i++ )
     {
-        const message           = post.message;
-        const messageLength     = message.length;
-        if ( messageLength > longestMessage )
-            longestMessage = messageLength;
-    } );
-    return longestMessage;
+        const post              = posts[i];
+        const month             = moment(post.created_time).format(`YYYY-MM`);
+        if ( !months[month] )
+            months[month] = -1;
+        if ( post.message.length > months[month] )
+            months[month] = post.message.length;
+    } // end for i
+    const longestArray = [];
+    const monthNameArray =  Object.keys(months);
+    for ( let i = 0; i < monthNameArray.length; i++ )
+    {
+        const month = monthNameArray[i];
+        const longest = { month: month, longestMessage: months[month] };
+        longestArray.push( longest );
+    } // end for i
+    return longestArray;
 }
 
 /* Total posts split by week number*/
