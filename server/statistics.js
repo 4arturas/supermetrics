@@ -73,7 +73,7 @@ function longestPostByCharacterLengthPerMonthSQL( posts )
         return moment(created_time).format(`YYYY-MM`);
     };
     let longestMessages = alasql('SELECT messageLength(message) AS messageLength, converteCreatedTimeToYYYYMMM(created_time) as month FROM ?', [posts]);
-    longestMessages = alasql( 'SELECT month, MAX(messageLength) AS averageCharacterLength FROM ? GROUP BY month ORDER BY month', [longestMessages] );
+    longestMessages = alasql( 'SELECT month, MAX(messageLength) AS longestMessage FROM ? GROUP BY month ORDER BY month', [longestMessages] );
     return longestMessages;
 }
 
