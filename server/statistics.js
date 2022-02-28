@@ -64,6 +64,18 @@ function longestPostByCharacterLengthPerMonth( posts )
     } // end for i
     return longestArray;
 }
+function longestPostByCharacterLengthPerMonthSQL( posts )
+{
+    alasql.fn.messageLength = function(message) {
+        return message.length;
+    };
+    alasql.fn.converteCreatedTimeToYYYYMMM = function(created_time) {
+        return moment(created_time).format(`YYYY-MM`);
+    };
+    let longestMessages = alasql('SELECT messageLength(message) AS messageLength, converteCreatedTimeToYYYYMMM(created_time) as month FROM ?', [posts]);
+    longestMessages = alasql( 'SELECT month, MAX(messageLength) AS averageCharacterLength FROM ? GROUP BY month ORDER BY month', [longestMessages] );
+    return longestMessages;
+}
 
 /* Total posts split by week number*/
 function totalPostsSplitByWeekNumber( posts )
@@ -127,6 +139,7 @@ module.exports = {
     averageCharactersLengthOfPostsPerMonth,
     averageCharactersLengthOfPostsPerMonthSQL,
     longestPostByCharacterLengthPerMonth,
+    longestPostByCharacterLengthPerMonthSQL,
     totalPostsSplitByWeekNumber,
     averageNumberOfPostsPerUserPerMonth
 };
