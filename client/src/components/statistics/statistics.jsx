@@ -4,7 +4,10 @@ import Unauthorized from "../loginform/unauthorized";
 import BarChart from './BarChart';
 import moment from "moment";
 import {Card, CardContent, Typography} from "@mui/material";
-import {AVERAGE_CHARACTERS_LENGTH_OR_POSTS_PER_MONTH} from "../../query/user";
+import {
+    AVERAGE_CHARACTERS_LENGTH_OR_POSTS_PER_MONTH,
+    LONGEST_POST_BY_CHARACTER_LENGTH_PER_MMONTH
+} from "../../query/user";
 import {useQuery} from "@apollo/client";
 
 function Statistics() {
@@ -12,16 +15,20 @@ function Statistics() {
     const {sltoken} = useContext(LoginContext);
     const {posts}   = useContext(PostsContext);
     const [average, setAverage] = useState([]);
+    const [longestPost, setLongestPost] = useState([]);
     let messageLengthPosts = [];
 
 
 
-    const {data, loading, error, refetch: refetchAllUsers} = useQuery(AVERAGE_CHARACTERS_LENGTH_OR_POSTS_PER_MONTH)
+    const {data: averageDataQQL, loading: loadingAverageDataQQL, errorAverageDataQQL} = useQuery(AVERAGE_CHARACTERS_LENGTH_OR_POSTS_PER_MONTH)
+    const {data: longestPostDataQQL, loading: loadingLongestPostQQL, errorLongestPostQQL} = useQuery(LONGEST_POST_BY_CHARACTER_LENGTH_PER_MMONTH)
     useEffect(() => {
-        if (!loading) {
-            setAverage(data.averageCharactersLengthOfPostsPerMonth.flatMap( d => { return { xxx: d.month, yyy: d.averageCharacterLength } } ) );
-        }
-    }, [data])
+        if (!loadingAverageDataQQL)
+            setAverage(averageDataQQL.averageCharactersLengthOfPostsPerMonth.flatMap( d => { return { xxx: d.month, yyy: d.averageCharacterLength } } ) );
+        if (!loadingLongestPostQQL)
+            setLongestPost(longestPostDataQQL.longestPostByCharacterLengthPerMonth.flatMap( d => { return { xxx: d.month, yyy: d.longestMessage } } ) );
+
+    }, [averageDataQQL, longestPostDataQQL])
 
 
     if ( !sltoken )
@@ -47,6 +54,12 @@ function Statistics() {
                     Average character length of posts per month
                 </Typography>
                 <BarChart data={average}/>
+            </CardContent>
+            <CardContent>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    Longest post by character length per month
+                </Typography>
+                <BarChart data={longestPost}/>
             </CardContent>
         </Card>
 

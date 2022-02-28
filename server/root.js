@@ -53,7 +53,11 @@ const root = {
     },
     averageCharactersLengthOfPostsPerMonth: () =>
     {
-        return statistics.averageCharactersLengthOfPostsPerMonth( postsDB );
+        return statistics.averageCharactersLengthOfPostsPerMonthSQL( postsDB );
+    },
+    longestPostByCharacterLengthPerMonth: () =>
+    {
+        return statistics.longestPostByCharacterLengthPerMonthSQL( postsDB );
     },
 
     getUser: ({id}) =>

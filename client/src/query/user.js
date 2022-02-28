@@ -22,6 +22,10 @@ export const AVERAGE_CHARACTERS_LENGTH_OR_POSTS_PER_MONTH = gql`
     query { averageCharactersLengthOfPostsPerMonth { month,  averageCharacterLength} }
 `;
 
+export const LONGEST_POST_BY_CHARACTER_LENGTH_PER_MMONTH = gql`
+    query { longestPostByCharacterLengthPerMonth { month,  longestMessage} }
+`;
+
 export const GET_ONE_USER = gql`
     query getUser($id: ID){
         getUser(id: $id) {
