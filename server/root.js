@@ -1,5 +1,6 @@
 const supermetricsAPI   = require("./supermetricsAPI");
 const randomPosts       = require("./randomPosts");
+const statistics        = require("./statistics");
 
 let postsDB = [];
 
@@ -49,6 +50,10 @@ const root = {
         const posts = randomPosts.generateRandomPosts();
         postsDB = posts;
         return posts;
+    },
+    averageCharactersLengthOfPostsPerMonth: () =>
+    {
+        return statistics.averageCharactersLengthOfPostsPerMonth( postsDB );
     },
 
     getUser: ({id}) =>
