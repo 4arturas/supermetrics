@@ -42,14 +42,13 @@ const root = {
             posts.push( ...p );
         }
         postsDB = posts;
-        return posts;
+        return postsDB;
     },
     generateRandomPosts: () =>
     {
         console.log( 'generateRandomPosts' );
-        const posts = randomPosts.generateRandomPosts();
-        postsDB = posts;
-        return posts;
+        postsDB = randomPosts.generateRandomPosts();
+        return postsDB;
     },
     averageCharactersLengthOfPostsPerMonth: () =>
     {
