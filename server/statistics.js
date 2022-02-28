@@ -145,17 +145,35 @@ function averageNumberOfPostsPerUserPerMonth( posts )
     } );
 
     const averages = {};
+    const averagesArr = [];
     const users =  Object.keys(usersHashMap);
     users.map( from_id => {
         const months = Object.keys( usersHashMap[from_id] );
+        const uuu = { from_id: from_id, averagePerMonth: 0 };
         averages[from_id] = 0;
         months.map( monthNumber => {
             averages[from_id] += usersHashMap[from_id][monthNumber];
+            uuu.averagePerMonth += usersHashMap[from_id][monthNumber];
         });
         const totalNumberOfMonthsUserHasBeenPosting = months.length;
         averages[from_id] /= totalNumberOfMonthsUserHasBeenPosting;
+        uuu.averagePerMonth /= totalNumberOfMonthsUserHasBeenPosting;
+        averagesArr.push( uuu );
     });
-    return averages;
+    // return averages;
+    return averagesArr;
+}
+function averageNumberOfPostsPerUserPerMonthSQL( posts )
+{
+    alasql.fn.converteCreatedTimeToYYYYMMM = function(created_time) {
+        return moment(created_time).format(`YYYY-MM`);
+    };
+
+    let averageMessagesPerUserPerMonth = alasql('SELECT from_id, message, converteCreatedTimeToYYYYMMM(created_time) as month FROM ?', [posts]);
+    averageMessagesPerUserPerMonth = alasql('SELECT from_id, COUNT(message) AS messageCount, month FROM ? GROUP BY from_id, month', [averageMessagesPerUserPerMonth]);
+    averageMessagesPerUserPerMonth = alasql('SELECT from_id, SUM(messageCount)/COUNT(month) AS averagePerMonth FROM ? GROUP BY from_id ORDER BY from_id', [averageMessagesPerUserPerMonth]);
+
+    return averageMessagesPerUserPerMonth;
 }
 
 module.exports = {
@@ -165,5 +183,6 @@ module.exports = {
     longestPostByCharacterLengthPerMonthSQL,
     totalPostsSplitByWeekNumber,
     totalPostsSplitByWeekNumberSQL,
-    averageNumberOfPostsPerUserPerMonth
+    averageNumberOfPostsPerUserPerMonth,
+    averageNumberOfPostsPerUserPerMonthSQL
 };
