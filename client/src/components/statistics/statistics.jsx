@@ -86,11 +86,11 @@ function Statistics() {
             // .attr("fill", "#69b3a2")
 
     }
+
     useEffect(() => {
 
         if (!loadingAverageDataQQL)
             setAverageCharactersLengthOfPostsPerMonth(averageDataQQL.averageCharactersLengthOfPostsPerMonth);
-
 
         if (!loadingLongestPost1QQL)
             setLongestPostByCharacterLengthPerMonth(longestPost1DataQQL.longestPostByCharacterLengthPerMonth);
@@ -110,7 +110,7 @@ function Statistics() {
 
     return <div>
         <h3>Statistics</h3>
-        {/*<BarChart data={posts.flatMap( p => { return { year: parseInt( moment(p.created_time).format(`YYYY`) ), sales: 1000 } } )}/>*/}
+
         <Card sx={{ minWidth: 275 }}>
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
