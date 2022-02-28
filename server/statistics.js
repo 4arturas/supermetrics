@@ -1,4 +1,5 @@
 const moment = require("moment");
+const alasql = require("alasql");
 
 /* Average character length of posts per month */
 function averageCharactersLengthOfPostsPerMonth( posts )
@@ -22,6 +23,21 @@ function averageCharactersLengthOfPostsPerMonth( posts )
         const avg = { month: month, averageCharacterLength: monthData.totalMessagesLength/monthData.messageCount };
         averages.push( avg );
     } // end for i
+    return averages;
+}
+function averageCharactersLengthOfPostsPerMonthSQL( posts )
+{
+    // id, from_name, from_id, message, type, created_time
+    // const res = alasql('SELECT a, SUM(b) AS b FROM ? GROUP BY a',[posts]);
+    alasql.fn.messageLength = function(message) {
+        return message.length;
+    };
+    alasql.fn.converteCreatedTimeToYYYYMMM = function(created_time) {
+        return moment(created_time).format(`YYYY-MM`);
+    };
+    let averages = alasql('SELECT messageLength(message) AS messageLength, converteCreatedTimeToYYYYMMM(created_time) as month FROM ?', [posts]);
+    averages = alasql( 'SELECT month, AVG(messageLength) AS averageCharacterLength FROM ? GROUP BY month ORDER BY month', [averages] );
+    // const res = alasql('SELECT avg(message) FROM ?',[posts]);
     return averages;
 }
 
@@ -99,6 +115,7 @@ function averageNumberOfPostsPerUserPerMonth( posts )
 
 module.exports = {
     averageCharactersLengthOfPostsPerMonth,
+    averageCharactersLengthOfPostsPerMonthSQL,
     longestPostByCharacterLengthPerMonth,
     totalPostsSplitByWeekNumber,
     averageNumberOfPostsPerUserPerMonth
