@@ -101,7 +101,7 @@ function Statistics() {
         if (!averageNumberOfPostsPerUserPerMonthLoading)
             setAverageNumberOfPostsPerUserPerMonth( averageNumberOfPostsPerUserPerMonthData.averageNumberOfPostsPerUserPerMonth);
 
-    }, [])
+    }, [averageDataQQL, longestPost1DataQQL, longestPost2DataQQL, averageNumberOfPostsPerUserPerMonthData])
 
 
     if ( !sltoken )
