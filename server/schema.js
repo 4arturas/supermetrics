@@ -78,7 +78,7 @@ const schema = buildSchema(`
     type AverageNumberOfPostsPerUserPerMonth
     {
         from_id: String  
-        averagePerMonth: String    
+        averagePerMonth: Float    
     }
     
     type Query
