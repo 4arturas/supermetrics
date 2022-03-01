@@ -1,14 +1,12 @@
 import React, {useContext, useEffect, useState} from "react";
 import {LoginContext, PostsContext} from "../../context/context";
 import Unauthorized from "../loginform/unauthorized";
-import BarChart from './BarChart';
 import {Card, CardContent, Typography} from "@mui/material";
 import {
     AVERAGE_CHARACTERS_LENGTH_OF_POSTS_PER_MONTH, AVERAGE_NUMBER_OF_POSTS_PER_USER_PER_MONTH,
     LONGEST_POST_BY_CHARACTER_LENGTH_PER_MMONTH, TOTAL_LONGEST_POST_BY_CHARACTER_LENGTH_PER_MONTH
 } from "../../query/user";
 import {useQuery} from "@apollo/client";
-import * as d3 from 'd3'
 import DataTable from "./DataTable";
 import D3HorizontalBarChart from "./D3HorizontalBarChart";
 
