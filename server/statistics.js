@@ -2,7 +2,7 @@ const moment = require("moment");
 const alasql = require("alasql");
 
 /* Average character length of posts per month */
-function averageCharactersLengthOfPostsPerMonth( posts )
+function averageCharactersLengthOfPostsPerMonthOldSchool( posts )
 {
     const months = {};
     for ( let i = 0; i < posts.length; i++ )
@@ -40,7 +40,7 @@ function averageCharactersLengthOfPostsPerMonthSQL( posts )
     // const res = alasql('SELECT avg(message) FROM ?',[posts]);
     return averages;
 }
-function averageCharactersLengthOfPostsPerMonth22( posts )
+function averageCharactersLengthOfPostsPerMonth( posts )
 {
     const totalCharactersLengthPerMonth = posts.reduce( (acc, post) => {
         let month = moment(post.created_time).format('YYYY-MM');
@@ -58,7 +58,7 @@ function averageCharactersLengthOfPostsPerMonth22( posts )
         } );
 }
 /* Longest post by character length per month */
-function longestPostByCharacterLengthPerMonth( posts )
+function longestPostByCharacterLengthPerMonthOldSchool( posts )
 {
     const months = {};
     for ( let i = 0; i < posts.length; i++ )
@@ -92,7 +92,7 @@ function longestPostByCharacterLengthPerMonthSQL( posts )
     longestMessages = alasql( 'SELECT month, MAX(messageLength) AS longestMessage FROM ? GROUP BY month ORDER BY month', [longestMessages] );
     return longestMessages;
 }
-function longestPostByCharacterLengthPerMonth22( posts )
+function longestPostByCharacterLengthPerMonth( posts )
 {
     const longestMessageLengthPerMonth = posts.reduce( (acc, post) => {
         const month = moment(post.created_time).format('YYYY-MM');
@@ -112,7 +112,7 @@ function longestPostByCharacterLengthPerMonth22( posts )
         } );
 }
 /* Total posts split by week number*/
-function totalPostsSplitByWeekNumber( posts )
+function totalPostsSplitByWeekNumberOldSchool( posts )
 {
     const weeksHashTable = {};
     posts.map( post => {
@@ -149,7 +149,7 @@ function totalPostsSplitByWeekNumberSQL( posts )
     ret = alasql( 'SELECT week, count(message) AS messagesCount FROM ? GROUP BY week ORDER BY week', [ret] );
     return ret;
 }
-function totalPostsSplitByWeekNumber22( posts )
+function totalPostsSplitByWeekNumber( posts )
 {
     const totalPostsByWeek = posts.reduce( (acc, post) => {
         const date = moment(post.created_time, 'YYYY-MM-DD[T]HH:mm:ss');
@@ -171,7 +171,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
 /* Average number of posts per user per month */
-function averageNumberOfPostsPerUserPerMonth( posts )
+function averageNumberOfPostsPerUserPerMonthOldSchool( posts )
 {
     // After data analysis I see that there is only data for February, but lets do what is said in the task
     // Hashtable for user->month->postNumber
@@ -226,7 +226,7 @@ function averageNumberOfPostsPerUserPerMonthSQL( posts )
 
     return averageMessagesPerUserPerMonth;
 }
-function averageNumberOfPostsPerUserPerMonth22( posts )
+function averageNumberOfPostsPerUserPerMonth( posts )
 {
     const postsPerUser = posts.reduce( (acc, post) => {
         const key = post.from_id;
@@ -263,16 +263,16 @@ function averageNumberOfPostsPerUserPerMonth22( posts )
     });
 }
 module.exports = {
-    averageCharactersLengthOfPostsPerMonth,
+    averageCharactersLengthOfPostsPerMonthOldSchool,
     averageCharactersLengthOfPostsPerMonthSQL,
-    averageCharactersLengthOfPostsPerMonth22,
-    longestPostByCharacterLengthPerMonth,
+    averageCharactersLengthOfPostsPerMonth,
+    longestPostByCharacterLengthPerMonthOldSchool,
     longestPostByCharacterLengthPerMonthSQL,
-    longestPostByCharacterLengthPerMonth22,
-    totalPostsSplitByWeekNumber,
+    longestPostByCharacterLengthPerMonth,
+    totalPostsSplitByWeekNumberOldSchool,
     totalPostsSplitByWeekNumberSQL,
-    totalPostsSplitByWeekNumber22,
-    averageNumberOfPostsPerUserPerMonth,
+    totalPostsSplitByWeekNumber,
+    averageNumberOfPostsPerUserPerMonthOldSchool,
     averageNumberOfPostsPerUserPerMonthSQL,
-    averageNumberOfPostsPerUserPerMonth22
+    averageNumberOfPostsPerUserPerMonth
 };
