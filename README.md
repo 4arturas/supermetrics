@@ -6,7 +6,7 @@ npm install
 node index.js
 ````
 
-# Web implementation of the task
+# Web implementation of the task - optional
 ## Backend: nodejs+express
 ````
 git clone git@github.com:4arturas/supermetrics.git
@@ -22,7 +22,20 @@ npm start
 ````
 Navigate to http://localhost:3000/
 
-# DevOps implementation
+# DevOps implementation - optional
+- Install docker https://docs.docker.com/get-docker/
+- Install minikube https://minikube.sigs.k8s.io/docs/start/
+- Install skaffold https://skaffold.dev/docs/install/
+````
+git clone git@github.com:4arturas/supermetrics.git
+cd supermetrics
+skaffold dev
+````
+````
+minikube ip
+````
+Navigate to http://${minikube ip}
+
 ````
 node -r dotenv/config index.js
 ````
