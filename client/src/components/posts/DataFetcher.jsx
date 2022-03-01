@@ -74,7 +74,6 @@ function DataFetcher()
                 { loadingData && <CircularProgress color="primary" /> }
             </Grid>
         </Grid>
-        {/*{data && data.map((c, i) => <div key={i}>{c.id} - {c.from_name}</div>)}*/}
     </div>
 }
 export default DataFetcher;
