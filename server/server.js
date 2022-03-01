@@ -13,4 +13,5 @@ app.use( '/graphql', graphqlHTTP({
     rootValue: root
 }) );
 
-app.listen( 5001, () => console.log( 'Application is running' ) );
+const APP_PORT = process.env.APP_PORT | 5001;
+app.listen( APP_PORT, () => console.log( `Application is running on port ${APP_PORT}` ) );
