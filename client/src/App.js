@@ -19,34 +19,34 @@ const App = () => {
 
   return (
       <LoginContext.Provider value={{sltoken, setSltoken}}>
-      { !sltoken ?
-      <Grid container justifyContent="center"><LoginForm/></Grid> :
-      <Router>
-        <Grid container justifyContent="center">
-          <Grid item xs={2}>
-            <div className="sidebar">
-              <NavLink to="/posts" className={({isActive}) => 'link' + (isActive ? ' activeLink' : '')}>
-                <PermIdentityIcon/>
-                <h2>Posts</h2>
-              </NavLink>
-              <NavLink to="/statistics" className={({isActive}) => 'link' + (isActive ? ' activeLink' : '')}>
-                <Lists/>
-                <h2>Statistics</h2>
-              </NavLink>
-            </div>
-          </Grid>
-          <Grid item xs={6} style={{margin: '20px'}}>
-            <PostsContext.Provider value={{posts, setPosts}}>
-            <Routes>
-              <Route exact path='/' element={<Posts/>}/>
-              <Route path='/posts' element={<Posts/>}/>
-              <Route path='/statistics' element={<Statistics/>}/>
-            </Routes>
-            </PostsContext.Provider>
-          </Grid>
-        </Grid>
-      </Router>
-      }
+          <PostsContext.Provider value={{posts, setPosts}}>
+              { !sltoken ?
+              <Grid container justifyContent="center"><LoginForm/></Grid> :
+              <Router>
+                <Grid container justifyContent="center">
+                  <Grid item xs={2}>
+                    <div className="sidebar">
+                      <NavLink to="/posts" className={({isActive}) => 'link' + (isActive ? ' activeLink' : '')}>
+                        <PermIdentityIcon/>
+                        <h2>Posts</h2>
+                      </NavLink>
+                      <NavLink to="/statistics" className={({isActive}) => 'link' + (isActive ? ' activeLink' : '')}>
+                        <Lists/>
+                        <h2>Statistics</h2>
+                      </NavLink>
+                    </div>
+                  </Grid>
+                  <Grid item xs={6} style={{margin: '20px'}}>
+                    <Routes>
+                      <Route exact path='/' element={<Posts/>}/>
+                      <Route path='/posts' element={<Posts/>}/>
+                      <Route path='/statistics' element={<Statistics/>}/>
+                    </Routes>
+                  </Grid>
+                </Grid>
+              </Router>
+              }
+          </PostsContext.Provider>
       </LoginContext.Provider>
   );
 };
