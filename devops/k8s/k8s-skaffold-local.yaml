@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supermetrics-k8s
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: supermetrics-k8s
+  template:
+    metadata:
+      labels:
+        app: supermetrics-k8s
+    spec:
+      containers:
+        - name: supermetrics-k8s
+          image: supermetrics-k8s
+          ports:
+            - containerPort: 80
+          env:
+            - name: APP_PORT
+              value: '80'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: supermetrics-k8s
+  labels:
+    app: supermetrics-k8s
+spec:
+  selector:
+    app: supermetrics-k8s
+  ports:
+    - name: supermetrics-k8s
+      port: 80
+      targetPort: 3000
+      protocol: TCP
+      nodePort: 30333
+  type: NodePort
