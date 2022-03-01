@@ -54,11 +54,14 @@ function supermetricsTaskImplementation() {
     console.log('#########################################################################');
     const average = statistics.averageCharactersLengthOfPostsPerMonth( posts );
     console.log( 'Average character length of posts per month' );
-    console.log( average );
+    // console.log( average );
     const averageSQL = statistics.averageCharactersLengthOfPostsPerMonthSQL( posts );
     console.log( 'Average character length of posts per month SQL' );
     console.log( averageSQL );
-
+    const average22 = statistics.averageCharactersLengthOfPostsPerMonth22( posts );
+    console.log( 'Average character length of posts per month 2' );
+    console.log( average22 );
+return;
     // b. - Longest post by character length per month
     console.log('#########################################################################');
     const longestMessage = statistics.longestPostByCharacterLengthPerMonth( posts );

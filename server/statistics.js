@@ -40,7 +40,23 @@ function averageCharactersLengthOfPostsPerMonthSQL( posts )
     // const res = alasql('SELECT avg(message) FROM ?',[posts]);
     return averages;
 }
+function averageCharactersLengthOfPostsPerMonth22( posts )
+{
+    const totalCharactersLengthPerMonth = posts.reduce( (acc, post) => {
+        let month = moment(post.created_time).format('YYYY-MM');
+        if (!acc[month])
+            acc[month] = [];
+        acc[month].push(post.message.length);
+        return acc;
+    }, {} );
 
+    return Object.keys( totalCharactersLengthPerMonth )
+        .map( ( month ) => {
+            return {
+                month: month,
+                averageCharacterLength: totalCharactersLengthPerMonth[month].reduce( ( previous, current ) => previous + current , 0 ) / totalCharactersLengthPerMonth[month].length }
+        } );
+}
 /* Longest post by character length per month */
 function longestPostByCharacterLengthPerMonth( posts )
 {
@@ -76,7 +92,6 @@ function longestPostByCharacterLengthPerMonthSQL( posts )
     longestMessages = alasql( 'SELECT month, MAX(messageLength) AS longestMessage FROM ? GROUP BY month ORDER BY month', [longestMessages] );
     return longestMessages;
 }
-
 /* Total posts split by week number*/
 function totalPostsSplitByWeekNumber( posts )
 {
@@ -179,6 +194,7 @@ function averageNumberOfPostsPerUserPerMonthSQL( posts )
 module.exports = {
     averageCharactersLengthOfPostsPerMonth,
     averageCharactersLengthOfPostsPerMonthSQL,
+    averageCharactersLengthOfPostsPerMonth22,
     longestPostByCharacterLengthPerMonth,
     longestPostByCharacterLengthPerMonthSQL,
     totalPostsSplitByWeekNumber,
