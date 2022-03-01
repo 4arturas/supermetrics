@@ -61,7 +61,7 @@ function supermetricsTaskImplementation() {
     const average22 = statistics.averageCharactersLengthOfPostsPerMonth22( posts );
     console.log( 'Average character length of posts per month 2' );
     console.log( average22 );
-return;
+
     // b. - Longest post by character length per month
     console.log('#########################################################################');
     const longestMessage = statistics.longestPostByCharacterLengthPerMonth( posts );
@@ -70,6 +70,9 @@ return;
     const longestMessageSQL = statistics.longestPostByCharacterLengthPerMonthSQL( posts );
     console.log( 'Longest post by character length per month SQL' );
     console.log( longestMessageSQL );
+    const longestMessage22 = statistics.longestPostByCharacterLengthPerMonth22( posts );
+    console.log( 'Longest post by character length per month 22' );
+    console.log( longestMessage22 );
 
     // c. - Total posts split by week number
     console.log('#########################################################################');
@@ -79,6 +82,9 @@ return;
     console.log( 'Total posts split by week number SQL' );
     const weeksHashTableSQL = statistics.totalPostsSplitByWeekNumberSQL( posts );
     console.log( weeksHashTableSQL );
+    console.log( 'Total posts split by week number 22' );
+    const weeksHashTable22 = statistics.totalPostsSplitByWeekNumber22( posts );
+    console.log( weeksHashTable22 );
 
     // d. - Average number of posts per user per month
     console.log('#########################################################################');
@@ -88,6 +94,9 @@ return;
     const average2SQL = statistics.averageNumberOfPostsPerUserPerMonthSQL( posts );
     console.log( 'Average number of posts per user per month SQL' );
     console.log( average2SQL );
+    const average222 = statistics.averageNumberOfPostsPerUserPerMonth22( posts );
+    console.log( 'Average number of posts per user per month 22' );
+    console.log( average222 );
 }
 supermetricsTaskImplementation();
 
