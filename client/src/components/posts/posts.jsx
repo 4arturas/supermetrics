@@ -27,11 +27,12 @@ function Posts() {
 
 
     const [fetchSupermetrics, { called: supermetricsCalled, loading: supermetricsLoading, data: supermetricsData }] =
-        useLazyQuery( FETCH_SUPERMETRICS_POSTS, { variables: { sl_token: sltoken } } );
+        useLazyQuery( FETCH_SUPERMETRICS_POSTS, { variables: { sl_token: sltoken }, onCompleted: supermetricsPosts => { setPosts( supermetricsPosts.fetchSupermetricsPosts ); setLoadingData( false ); } } );
 
-    const [randomPosts, { called: randomCalled, loading: randomLoading, data: randomData }] = useLazyQuery( GENERATE_RANDOM_POSTS );
+    const [randomPosts, { called: randomCalled, loading: randomLoading, data: randomData }] = useLazyQuery( GENERATE_RANDOM_POSTS,
+        { onCompleted: randomPosts => { setPosts( randomPosts.generateRandomPosts ); setLoadingData( false ); } } );
 
-    const handleSubmit1 = (event) => {
+    const handleSupermetricsPosts = (event) => {
         event.preventDefault();
         setLoadingData(true);
         setData( null );
@@ -39,7 +40,7 @@ function Posts() {
         fetchSupermetrics();
     }
 
-    const handleSubmit2 = (event) => {
+    const handleRandomPosts = (event) => {
         event.preventDefault();
         setLoadingData( true );
         setData( null );
@@ -50,28 +51,6 @@ function Posts() {
     if ( !sltoken )
         return <Unauthorized/>
 
-    if ( supermetricsData && supermetricsData.fetchSupermetricsPosts )
-    {
-        if ( !data )
-        {
-            const p = supermetricsData.fetchSupermetricsPosts;
-            setTimeout( () => setPosts( p ), 0 );
-            setData( p );
-            setLoadingData( false );
-        }
-    }
-
-    if ( randomData && randomData.generateRandomPosts )
-    {
-        if ( !data )
-        {
-            const p = randomData.generateRandomPosts;
-            setTimeout( () => setPosts( p ), 0 );
-            setData( p );
-            setLoadingData( false );
-        }
-    }
-
     return <div>
             <h3>Posts</h3>
             <Grid container>
@@ -81,7 +60,7 @@ function Posts() {
                             color="primary"
                             variant="contained"
                             type="submit"
-                            onClick={handleSubmit1} disabled={loadingData}>Fetch</Button> Supermetrics data
+                            onClick={handleSupermetricsPosts} disabled={loadingData}>Fetch</Button> Supermetrics data
                     </div>
                 </Grid>
                 <Divider orientation="vertical" flexItem>
@@ -92,12 +71,12 @@ function Posts() {
                             color="primary"
                             variant="contained"
                             type="submit"
-                            onClick={handleSubmit2} disabled={loadingData}>Generate</Button> random data
+                            onClick={handleRandomPosts} disabled={loadingData}>Generate</Button> random data
                     </div>
                 </Grid>
                 <Grid item xs={12}><br/>
                     { loadingData && <CircularProgress color="primary" /> }
-                    { posts && <EnhancedTable rows={posts}/>}
+                    { posts && <EnhancedTable rows={posts}/> }
                 </Grid>
             </Grid>
                 {/*{data && data.map((c, i) => <div key={i}>{c.id} - {c.from_name}</div>)}*/}
