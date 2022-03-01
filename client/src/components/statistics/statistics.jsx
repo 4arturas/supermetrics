@@ -14,16 +14,16 @@ function Statistics() {
 
     const {sltoken} = useContext(LoginContext);
     const {posts}   = useContext(PostsContext);
-    const [averageCharactersLengthOfPostsPerMonth, setAverageCharactersLengthOfPostsPerMonth] = useState([]);
-    const [longestPostByCharacterLengthPerMonth, setLongestPostByCharacterLengthPerMonth] = useState([]);
-    const [totalPostsSplitByWeekNumber, setTotalPostsSplitByWeekNumber] = useState([]);
-    const [averageNumberOfPostsPerUserPerMonth, setAverageNumberOfPostsPerUserPerMonth] = useState([]);
+    const [averageCharactersLengthOfPostsPerMonth, setAverageCharactersLengthOfPostsPerMonth]   = useState([]);
+    const [longestPostByCharacterLengthPerMonth, setLongestPostByCharacterLengthPerMonth]       = useState([]);
+    const [totalPostsSplitByWeekNumber, setTotalPostsSplitByWeekNumber]                         = useState([]);
+    const [averageNumberOfPostsPerUserPerMonth, setAverageNumberOfPostsPerUserPerMonth]         = useState([]);
 
 
-    const {data: averageDataQQL, loading: loadingAverageDataQQL} = useQuery(AVERAGE_CHARACTERS_LENGTH_OF_POSTS_PER_MONTH)
-    const {data: longestPost1DataQQL, loading: loadingLongestPost1QQL} = useQuery(LONGEST_POST_BY_CHARACTER_LENGTH_PER_MMONTH)
-    const {data: longestPost2DataQQL, loading: loadingLongestPost2QQL} = useQuery(TOTAL_LONGEST_POST_BY_CHARACTER_LENGTH_PER_MONTH)
-    const {data: averageNumberOfPostsPerUserPerMonthData, loading: averageNumberOfPostsPerUserPerMonthLoading} = useQuery(AVERAGE_NUMBER_OF_POSTS_PER_USER_PER_MONTH)
+    const {data: averageDataQQL, loading: loadingAverageDataQQL}                                                = useQuery(AVERAGE_CHARACTERS_LENGTH_OF_POSTS_PER_MONTH)
+    const {data: longestPost1DataQQL, loading: loadingLongestPost1QQL}                                          = useQuery(LONGEST_POST_BY_CHARACTER_LENGTH_PER_MMONTH)
+    const {data: longestPost2DataQQL, loading: loadingLongestPost2QQL}                                          = useQuery(TOTAL_LONGEST_POST_BY_CHARACTER_LENGTH_PER_MONTH)
+    const {data: averageNumberOfPostsPerUserPerMonthData, loading: averageNumberOfPostsPerUserPerMonthLoading}  = useQuery(AVERAGE_NUMBER_OF_POSTS_PER_USER_PER_MONTH)
 
 
     useEffect(() => {
