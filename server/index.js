@@ -2,8 +2,6 @@ require('dotenv').config();
 const fs                = require('fs');
 const statistics        = require("./statistics");
 const supermetricsAPI   = require("./supermetricsAPI");
-const alasql = require("alasql");
-const moment = require("moment");
 
 const client_id = 'ju16a6m81mhid5ue1z3v2g0uh';
 const email = 'your@email.address';
