@@ -3,12 +3,13 @@ import {LoginContext, PostsContext} from "../../context/context";
 import Unauthorized from "../loginform/unauthorized";
 import {Card, CardContent, Typography} from "@mui/material";
 import {
-    AVERAGE_CHARACTERS_LENGTH_OF_POSTS_PER_MONTH, AVERAGE_NUMBER_OF_POSTS_PER_USER_PER_MONTH,
+    AVERAGE_CHARACTERS_LENGTH_OF_POSTS_PER_MONTH, AVERAGE_NUMBER_OF_POSTS_PER_USER_PER_MONTH, GENERATE_RANDOM_POSTS,
     LONGEST_POST_BY_CHARACTER_LENGTH_PER_MMONTH, TOTAL_LONGEST_POST_BY_CHARACTER_LENGTH_PER_MONTH
 } from "../../query/user";
-import {useQuery} from "@apollo/client";
+import {useLazyQuery, useQuery} from "@apollo/client";
 import DataTable from "./DataTable";
 import D3HorizontalBarChart from "./D3HorizontalBarChart";
+import DataFetcher from "../posts/DataFetcher";
 
 function Statistics() {
 
@@ -19,37 +20,57 @@ function Statistics() {
     const [totalPostsSplitByWeekNumber, setTotalPostsSplitByWeekNumber]                         = useState([]);
     const [averageNumberOfPostsPerUserPerMonth, setAverageNumberOfPostsPerUserPerMonth]         = useState([]);
 
+    const [firstCall] = useLazyQuery( AVERAGE_CHARACTERS_LENGTH_OF_POSTS_PER_MONTH,
+        { onCompleted: res => {
+                const d = res.averageCharactersLengthOfPostsPerMonth.flatMap( d => { return { xxx: d.month, yyy: d.averageCharacterLength } } );
+                setAverageCharactersLengthOfPostsPerMonth( d );
+            }
+        } );
 
-    const {data: averageDataQQL, loading: loadingAverageDataQQL}                                                = useQuery(AVERAGE_CHARACTERS_LENGTH_OF_POSTS_PER_MONTH)
-    const {data: longestPost1DataQQL, loading: loadingLongestPost1QQL}                                          = useQuery(LONGEST_POST_BY_CHARACTER_LENGTH_PER_MMONTH)
-    const {data: longestPost2DataQQL, loading: loadingLongestPost2QQL}                                          = useQuery(TOTAL_LONGEST_POST_BY_CHARACTER_LENGTH_PER_MONTH)
-    const {data: averageNumberOfPostsPerUserPerMonthData, loading: averageNumberOfPostsPerUserPerMonthLoading}  = useQuery(AVERAGE_NUMBER_OF_POSTS_PER_USER_PER_MONTH)
+    const [secondCall] = useLazyQuery( LONGEST_POST_BY_CHARACTER_LENGTH_PER_MMONTH,
+        { onCompleted: res => {
+                const d = res.longestPostByCharacterLengthPerMonth.flatMap( d => { return { xxx: d.month, yyy: d.longestMessage } } );
+                setLongestPostByCharacterLengthPerMonth(d);
+                console.log( d );
+            }
+        } );
 
+    const [thirdCall] = useLazyQuery( TOTAL_LONGEST_POST_BY_CHARACTER_LENGTH_PER_MONTH,
+        { onCompleted: res => {
+                const d = res.totalPostsSplitByWeekNumber.flatMap( d => { return { xxx: d.week, yyy: d.messagesCount } } );
+                setTotalPostsSplitByWeekNumber(d);
+            }
+        } );
+
+    const [forthCall] = useLazyQuery( AVERAGE_NUMBER_OF_POSTS_PER_USER_PER_MONTH,
+        { onCompleted: res => {
+                const d = res.averageNumberOfPostsPerUserPerMonth.flatMap( d => { return { xxx: d.from_id, yyy: d.averagePerMonth } } );
+                setAverageNumberOfPostsPerUserPerMonth( d );
+            }
+        } );
 
     useEffect(() => {
 
-        if (!loadingAverageDataQQL)
-            setAverageCharactersLengthOfPostsPerMonth(averageDataQQL.averageCharactersLengthOfPostsPerMonth.flatMap( d => { return { xxx: d.month, yyy: d.averageCharacterLength } } ));
+        if ( posts && averageCharactersLengthOfPostsPerMonth.length === 0 )
+        {
+            firstCall();
+            secondCall();
+            thirdCall();
+            forthCall()
+        }
+    }, [])
 
-        if (!loadingLongestPost1QQL)
-            setLongestPostByCharacterLengthPerMonth(longestPost1DataQQL.longestPostByCharacterLengthPerMonth.flatMap( d => { return { xxx: d.month, yyy: d.longestMessage } } ));
-
-        if (!loadingLongestPost2QQL)
-            setTotalPostsSplitByWeekNumber(longestPost2DataQQL.totalPostsSplitByWeekNumber.flatMap( d => { return { xxx: d.week, yyy: d.messagesCount } } ));
-
-        if (!averageNumberOfPostsPerUserPerMonthLoading)
-            setAverageNumberOfPostsPerUserPerMonth( averageNumberOfPostsPerUserPerMonthData.averageNumberOfPostsPerUserPerMonth.flatMap( d => { return { xxx: d.from_id, yyy: d.averagePerMonth } } ));
-
-    }, [averageDataQQL, longestPost1DataQQL, longestPost2DataQQL, averageNumberOfPostsPerUserPerMonthData])
 
 
     if ( !sltoken )
         return <Unauthorized/>
 
 
+
     return <div>
         <h3>Statistics</h3>
-
+        <DataFetcher/>
+        { posts &&
         <Card sx={{ minWidth: 275 }}>
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -89,9 +110,6 @@ function Statistics() {
                             </tr>
                         </tbody>
                     </table>
-
-
-                    // d3HorizontalBarChart( 'longestPostByCharacterLengthPerMonthId', longestPostByCharacterLengthPerMonth.flatMap( d => { return { xxx: d.month, yyy: d.longestMessage } } ) )
                 }
             </CardContent>
             <CardContent>
@@ -134,7 +152,7 @@ function Statistics() {
                     </table>
                 }
             </CardContent>
-        </Card>
+        </Card> }
 
     </div>
 }
