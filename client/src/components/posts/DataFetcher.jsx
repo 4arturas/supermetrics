@@ -21,8 +21,7 @@ const Grid = styled(MuiGrid)(({ theme }) => ({
 function DataFetcher()
 {
     const {sltoken}                     = useContext(LoginContext);
-    const {posts, setPosts}                    = useContext(PostsContext);
-    const [data, setData]               = useState(null);
+    const {setPosts}                    = useContext(PostsContext);
     const [loadingData, setLoadingData] = useState( false );
 
     const [fetchSupermetrics, { called: supermetricsCalled, loading: supermetricsLoading, data: supermetricsData }] =
@@ -34,7 +33,6 @@ function DataFetcher()
     const handleSupermetricsPosts = (event) => {
         event.preventDefault();
         setLoadingData(true);
-        setData( null );
         setPosts( null );
         fetchSupermetrics();
     }
@@ -42,7 +40,6 @@ function DataFetcher()
     const handleRandomPosts = (event) => {
         event.preventDefault();
         setLoadingData( true );
-        setData( null );
         setPosts( null );
         randomPosts();
     }
