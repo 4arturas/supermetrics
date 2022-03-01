@@ -4,11 +4,12 @@ import {CircularProgress} from "@mui/material";
 import {useContext, useState} from "react";
 import {useMutation} from "@apollo/client";
 import {LOGIN_USER} from "../../mutation/user";
-import {LoginContext} from "../../context/context";
+import {LoginContext, PostsContext} from "../../context/context";
 
 function LoginForm() {
 
     const {sltoken, setSltoken} = useContext(LoginContext);
+    const {setPosts}            = useContext(PostsContext);
 
     const createFormData = ( clientid, email, name ) => {
         return { clientid: clientid, email: email, name: name };
@@ -25,6 +26,7 @@ function LoginForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setPosts( null );
         loginUser({
             variables: {
                 input: {
