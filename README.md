@@ -1,9 +1,28 @@
+# Console implementation of the task
 ````
-cd server
+git clone git@github.com:4arturas/supermetrics.git
+cd supermetrics/server
 npm install
 node index.js
 ````
 
+# Web implementation of the task
+## Backend: nodejs+express
+````
+git clone git@github.com:4arturas/supermetrics.git
+cd supermetrics/server
+npm install
+npm run dev
+````
+## Fronted: React
+````
+cd supermetrics/client
+npm install
+npm start
+````
+Navigate to http://localhost:3000/
+
+# DevOps implementation
 ````
 node -r dotenv/config index.js
 ````
