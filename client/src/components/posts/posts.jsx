@@ -14,6 +14,7 @@ function Posts() {
         return <Unauthorized/>
 
     return <div>
+        <h3>Posts</h3>
         <div><DataFetcher/></div>
         { posts && <EnhancedTable rows={posts}/> }
     </div>

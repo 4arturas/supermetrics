@@ -47,8 +47,7 @@ function DataFetcher()
     if ( !sltoken )
         return <Unauthorized/>
 
-    return <div>
-        <h3>Posts</h3>
+    return (
         <Grid container>
             <Grid item xs>
                 <div>
@@ -73,7 +72,6 @@ function DataFetcher()
             <Grid item xs={12}><br/>
                 { loadingData && <CircularProgress color="primary" /> }
             </Grid>
-        </Grid>
-    </div>
+        </Grid> )
 }
 export default DataFetcher;
