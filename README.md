@@ -34,7 +34,7 @@ skaffold dev
 ````
 minikube ip
 ````
-Navigate to http://${minikube ip}
+Navigate to http://${minikube ip}:30333
 
 ````
 node -r dotenv/config index.js
