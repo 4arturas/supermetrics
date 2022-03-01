@@ -33,11 +33,3 @@ export const TOTAL_LONGEST_POST_BY_CHARACTER_LENGTH_PER_MONTH = gql`
 export const AVERAGE_NUMBER_OF_POSTS_PER_USER_PER_MONTH = gql`
     query { averageNumberOfPostsPerUserPerMonth { from_id,  averagePerMonth } }
 `;
-
-export const GET_ONE_USER = gql`
-    query getUser($id: ID){
-        getUser(id: $id) {
-            id, username
-        }
-    }    
-`;

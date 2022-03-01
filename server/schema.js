@@ -89,15 +89,12 @@ const schema = buildSchema(`
         longestPostByCharacterLengthPerMonth: [LongestPostByCharacterLengthPerMonth] 
         totalPostsSplitByWeekNumber: [TotalPostsSplitByWeekNumber] 
         averageNumberOfPostsPerUserPerMonth: [AverageNumberOfPostsPerUserPerMonth] 
-        getUser(id: ID): User
     }
     
     type Mutation 
     {
         loginUser(input: LoginInput): LoginUser
-        giveConsent(input: ConsentInput): Consent
         createUser(input: UserInput): User
-        testMutation(input: UserInput): Int
     }
 `);
 
