@@ -13,8 +13,8 @@
   color: black;
 }
 .link:hover {
-  background-color: #e8f5fe;
-  color: #50b7f5;
+  background-color: #1765C0;
+  color: white;
   transition: color 100ms ease-out;
 }
 .link > h2 {
