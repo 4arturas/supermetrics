@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: supermetrics-k8s
+  name: superm-k8s
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: supermetrics-k8s
+      app: superm-k8s
   template:
     metadata:
       labels:
-        app: supermetrics-k8s
+        app: superm-k8s
     spec:
       containers:
-        - name: supermetrics-k8s
-          image: supermetrics-k8s
+        - name: superm-k8s
+          image: superm-k8s
           ports:
             - containerPort: 80
           env:
@@ -24,16 +24,33 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: supermetrics-k8s
+  name: superm-k8s
   labels:
-    app: supermetrics-k8s
+    app: superm-k8s
 spec:
   selector:
-    app: supermetrics-k8s
+    app: cm-api-docs
   ports:
-    - name: supermetrics-k8s
-      port: 80
-      targetPort: 3000
+    - port: 80
       protocol: TCP
-      nodePort: 30333
-  type: NodePort
+      name: cm-api-docs
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: superm-k8s-ing
+  annotations:
+    nginx.ingress.kubernetes.io/redirect-regex: ^/(.*)
+spec:
+  rules:
+    - host: cm-api-docs.local.clearpay-test.systems
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: superm-k8s
+                port:
+                  name: superm-k8s
