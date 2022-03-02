@@ -16,6 +16,7 @@ function D3HorizontalBarChart( { data } )
             height = 400 - margin.top - margin.bottom;
 
         // append the svg object to the body of the page
+        ref.current.innerHTML = '';
         var svg = d3.select(ref.current)
             .append("svg")
             .attr("width", width + margin.left + margin.right)
