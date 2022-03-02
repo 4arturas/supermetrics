@@ -1,13 +1,12 @@
 import { styled } from '@mui/material/styles';
 import MuiGrid from '@mui/material/Grid';
-import Divider from '@mui/material/Divider';
 import {CircularProgress} from "@mui/material";
 import Button from "@mui/material/Button";
 import {useLazyQuery} from "@apollo/client";
 import {useContext, useState} from "react";
 import {LoginContext, PostsContext} from "../context/context";
 import Unauthorized from "./Unauthorized";
-import {FETCH_SUPERMETRICS_POSTS, GENERATE_RANDOM_POSTS} from "../graphql/query";
+import {FETCH_SUPERMETRICS_POSTS} from "../graphql/query";
 
 const Grid = styled(MuiGrid)(({ theme }) => ({
     width: '100%',
@@ -23,16 +22,9 @@ function DataFetcher( {callbackFunction} )
     const {setPosts}                    = useContext(PostsContext);
     const [loadingData, setLoadingData] = useState( false );
 
-    const [fetchSupermetrics, { called: supermetricsCalled, loading: supermetricsLoading, data: supermetricsData }] =
+    const [fetchSupermetrics] =
         useLazyQuery( FETCH_SUPERMETRICS_POSTS, { variables: { sl_token: sltoken }, onCompleted: supermetricsPosts => {
             setPosts( supermetricsPosts.fetchSupermetricsPosts );
-            setLoadingData( false );
-            callbackFunction();
-        } } );
-
-    const [randomPosts, { called: randomCalled, loading: randomLoading, data: randomData }] =
-        useLazyQuery( GENERATE_RANDOM_POSTS, { onCompleted: randomPosts => {
-            setPosts( randomPosts.generateRandomPosts );
             setLoadingData( false );
             callbackFunction();
         } } );
