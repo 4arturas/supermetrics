@@ -10,8 +10,7 @@ async function task() {
 
     // Login
     const requestToApiResult = await supermetricsAPI.connectToSupermetricsAPI( client_id, email, name );
-    if ( requestToApiResult.status !== 200 )
-    {
+    if ( requestToApiResult.status !== 200 ) {
         console.log( "ERROR", requestToApiResult );
         return;
     }
@@ -19,8 +18,7 @@ async function task() {
 
     // Fetch data
     const posts = [];
-    for ( let i = 1; i <= 10; i++ )
-    {
+    for ( let i = 1; i <= 10; i++ ) {
         const supermetricsData = await supermetricsAPI.getDataFromSupermetricsAPI( sl_token, i );
         const p = supermetricsData.data.posts;
         posts.push( ...p );
