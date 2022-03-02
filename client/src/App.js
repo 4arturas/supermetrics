@@ -7,7 +7,7 @@ import {BrowserRouter as Router, NavLink, Route, Routes} from 'react-router-dom'
 import {Grid} from "@mui/material";
 
 import Posts from "./components/posts/Posts";
-import Statistics from "./components/statistics/statistics";
+import Statistics from "./components/statistics/Statistics";
 import {useState} from "react";
 import Loginform from "./components/loginform/Loginform";
 import {LoginContext, PostsContext} from "./context/context";
