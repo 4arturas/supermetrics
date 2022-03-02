@@ -7,7 +7,8 @@ function D3HorizontalBarChart( { data } )
 
     useEffect(() => {
 
-        const maxYYY = data.sort( function( a, b ) { return b.yyy > a.yyy } )[0].yyy;
+        // const maxYYY = data.reduce( (p,c) => Math.max( p.yyy, c.yyy ), -1 );
+        const maxYYY = data.reduce((acc, shot) => acc = acc > shot.yyy ? acc : shot.yyy, 0);
 
         // set the dimensions and margins of the graph
         var margin = {top: 20, right: 30, bottom: 40, left: 90},
