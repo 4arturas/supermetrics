@@ -24,12 +24,6 @@ function replacePlaceholdersInFile(file) {
 }
 replacePlaceholdersInFile(INDEX_HTML);
 
-app.use( '/graphql', graphqlHTTP({
-    graphiql: true,
-    schema,
-    rootValue: root
-}) );
-
 const sendIndexPage = async (req, res) => {
     res.sendFile(INDEX_HTML);
 };
@@ -37,6 +31,12 @@ const sendIndexPage = async (req, res) => {
 async function redirectIfNotAuthenticated(req, res, next) {
     return next();
 }
+
+app.use( '/graphql', graphqlHTTP({
+    graphiql: true,
+    schema,
+    rootValue: root
+}) );
 
 app.use(redirectIfNotAuthenticated, express.static(path.join(__dirname, APP_BUILD)));
 app.get('/', redirectIfNotAuthenticated, sendIndexPage);
