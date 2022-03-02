@@ -25,10 +25,16 @@ function DataFetcher()
     const [loadingData, setLoadingData] = useState( false );
 
     const [fetchSupermetrics, { called: supermetricsCalled, loading: supermetricsLoading, data: supermetricsData }] =
-        useLazyQuery( FETCH_SUPERMETRICS_POSTS, { variables: { sl_token: sltoken }, onCompleted: supermetricsPosts => { setPosts( supermetricsPosts.fetchSupermetricsPosts ); setLoadingData( false ); } } );
+        useLazyQuery( FETCH_SUPERMETRICS_POSTS, { variables: { sl_token: sltoken }, onCompleted: supermetricsPosts => {
+            setPosts( supermetricsPosts.fetchSupermetricsPosts );
+            setLoadingData( false );
+        } } );
 
-    const [randomPosts, { called: randomCalled, loading: randomLoading, data: randomData }] = useLazyQuery( GENERATE_RANDOM_POSTS,
-        { onCompleted: randomPosts => { setPosts( randomPosts.generateRandomPosts ); setLoadingData( false ); } } );
+    const [randomPosts, { called: randomCalled, loading: randomLoading, data: randomData }] =
+        useLazyQuery( GENERATE_RANDOM_POSTS, { onCompleted: randomPosts => {
+            setPosts( randomPosts.generateRandomPosts );
+            setLoadingData( false );
+        } } );
 
     const handleSupermetricsPosts = (event) => {
         event.preventDefault();
