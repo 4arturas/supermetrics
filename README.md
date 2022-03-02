@@ -45,7 +45,7 @@ nodemon server.js
 ````
 
 # GraphQL
-Console can be accessed dependently on environment http://localhost:4000/graphql or http://supermetrics.sys/graphql
+Console can be accessed dependently on the environment http://localhost:4000/graphql or http://supermetrics.sys/graphql
 ````
 mutation {
   loginUser( input: {
