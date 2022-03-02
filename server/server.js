@@ -24,7 +24,7 @@ function replacePlaceholdersInFile(file) {
         );
     fs.writeFileSync(file, contents)
 }
-if ( APP_PORT === 80 )
+if ( APP_PORT === '80' )
     replacePlaceholdersInFile(INDEX_HTML);
 
 const sendIndexPage = async (req, res) => {
