@@ -6,7 +6,7 @@ import {useMutation} from "@apollo/client";
 import {LOGIN_USER} from "../../graphql/mutation";
 import {LoginContext, PostsContext} from "../../context/context";
 
-function LoginForm() {
+function Loginform() {
 
     const {sltoken, setSltoken} = useContext(LoginContext);
     const {setPosts}            = useContext(PostsContext);
@@ -90,4 +90,4 @@ function LoginForm() {
     )
 }
 
-export default LoginForm;
+export default Loginform;

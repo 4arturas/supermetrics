@@ -9,7 +9,7 @@ import {Grid} from "@mui/material";
 import Posts from "./components/posts/posts";
 import Statistics from "./components/statistics/statistics";
 import {useState} from "react";
-import LoginForm from "./components/loginform/loginform";
+import Loginform from "./components/loginform/Loginform";
 import {LoginContext, PostsContext} from "./context/context";
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
       <LoginContext.Provider value={{sltoken, setSltoken}}>
           <PostsContext.Provider value={{posts, setPosts}}>
               { !sltoken ?
-              <Grid container justifyContent="center"><LoginForm/></Grid> :
+              <Grid container justifyContent="center"><Loginform/></Grid> :
               <Router>
                 <Grid container justifyContent="center">
                   <Grid item xs={2}>
