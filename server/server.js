@@ -42,5 +42,4 @@ app.use(redirectIfNotAuthenticated, express.static(path.join(__dirname, APP_BUIL
 app.get('/', redirectIfNotAuthenticated, sendIndexPage);
 
 const APP_PORT = process.env.APP_PORT;
-console.log( APP_PORT );
 app.listen( APP_PORT, () => console.log( `Application running on port ${APP_PORT}` ) );
