@@ -8,7 +8,7 @@ import {Grid} from "@mui/material";
 
 import Posts from "./components/posts/posts";
 import Statistics from "./components/statistics/statistics";
-import {useMemo, useState} from "react";
+import {useState} from "react";
 import LoginForm from "./components/loginform/loginform";
 import {LoginContext, PostsContext} from "./context/context";
 
