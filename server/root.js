@@ -8,12 +8,10 @@ const root = {
     loginUser: async ({input}) =>
     {
         const response = await supermetricsAPI.connectToSupermetricsAPI( input.client_id, input.email,  input.name );
-        console.log( response );
         return { status: response.status, statusText: response.statusText, sl_token: response.data.sl_token };
     },
     fetchSupermetricsPosts: async ({sl_token}) =>
     {
-        console.log( 'fetchSupermetricsPosts', sl_token );
         const posts = [];
         for ( let i = 1; i <= 10; i++ )
         {
@@ -26,7 +24,6 @@ const root = {
     },
     generateRandomPosts: () =>
     {
-        console.log( 'generateRandomPosts' );
         postsDB = randomPosts.generateRandomPosts();
         return postsDB;
     },
