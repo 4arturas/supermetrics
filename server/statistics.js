@@ -167,9 +167,6 @@ function totalPostsSplitByWeekNumber( posts )
         return { week: week, messagesCount: totalPostsByWeek[week] }
     } );
 }
-const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-];
 /* Average number of posts per user per month */
 function averageNumberOfPostsPerUserPerMonthOldSchool( posts )
 {
