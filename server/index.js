@@ -3,21 +3,21 @@ const fs                = require('fs');
 const statistics        = require("./statistics");
 const supermetricsAPI   = require("./supermetricsAPI");
 
-const client_id = 'ju16a6m81mhid5ue1z3v2g0uh';
-const email = 'your@email.address';
-const name = 'Your Name';
-let sl_token;
-const jsonFilePath = '/home/arturas/IdeaProjects/supermetrics/server/supermetrics.json';
+async function task() {
+    const client_id     = process.env.client_id;
+    const email         = process.env.email;
+    const name          = process.env.name;
 
-async function saveSupermetricsDataToJSONFile() {
+    // Login
     const requestToApiResult = await supermetricsAPI.connectToSupermetricsAPI( client_id, email, name );
     if ( requestToApiResult.status !== 200 )
     {
         console.log( "ERROR", requestToApiResult );
         return;
     }
-    sl_token = requestToApiResult.data.sl_token;
+    const sl_token      = requestToApiResult.data.sl_token;
 
+    // Fetch data
     const posts = [];
     for ( let i = 1; i <= 10; i++ )
     {
@@ -25,21 +25,6 @@ async function saveSupermetricsDataToJSONFile() {
         const p = supermetricsData.data.posts;
         posts.push( ...p );
     }
-    console.log( posts );
-
-    const jSonPosts = JSON.stringify( posts );
-    fs.writeFile(jsonFilePath, jSonPosts, 'utf8', function (err,data) {
-        if (err) {
-            return console.log(err);
-        }
-        console.log(data);
-    });
-}
-// saveSupermetricsDataToJSONFile();
-
-function supermetricsTaskImplementation() {
-    const postsRawdata = fs.readFileSync(jsonFilePath);
-    const posts = JSON.parse(postsRawdata);
 
     // TASK
     // Show stats on the following:
@@ -68,5 +53,5 @@ function supermetricsTaskImplementation() {
     const averageNrOfPostsPerUserPerMonth = statistics.averageNumberOfPostsPerUserPerMonth( posts );
     console.log( averageNrOfPostsPerUserPerMonth );
 }
-supermetricsTaskImplementation();
+task();
 
