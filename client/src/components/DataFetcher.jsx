@@ -44,13 +44,6 @@ function DataFetcher( {callbackFunction} )
         fetchSupermetrics();
     }
 
-    const handleRandomPosts = (event) => {
-        event.preventDefault();
-        setLoadingData( true );
-        setPosts( null );
-        randomPosts();
-    }
-
     if ( !sltoken )
         return <Unauthorized/>
 
@@ -63,17 +56,6 @@ function DataFetcher( {callbackFunction} )
                         variant="contained"
                         type="submit"
                         onClick={handleSupermetricsPosts} disabled={loadingData}>Fetch</Button> Supermetrics data
-                </div>
-            </Grid>
-            <Divider orientation="vertical" flexItem>
-            </Divider>
-            <Grid item xs>
-                <div style={{textAlign:"right"}}>
-                    <Button
-                        color="primary"
-                        variant="contained"
-                        type="submit"
-                        onClick={handleRandomPosts} disabled={loadingData}>Generate</Button> random data
                 </div>
             </Grid>
             <Grid item xs={12}><br/>
