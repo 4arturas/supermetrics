@@ -3,7 +3,7 @@
 git clone git@github.com:4arturas/supermetrics.git
 cd supermetrics/server
 npm install
-node index.js
+node task.js
 ````
 
 # Web implementation of the task - optional
