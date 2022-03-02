@@ -41,7 +41,10 @@ skaffold dev
 ````
 minikube ip
 ````
-
+Add minikube ip into /etc/hosts file
+````
+192.168.49.2    supermetrics.sys
+````
 
 
 ````
