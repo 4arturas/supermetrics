@@ -6,13 +6,13 @@ import { connectToSupermetricsAPI, getDataFromSupermetricsAPI } from "./supermet
 
 async function task() {
     const client_id: string = "ju16a6m81mhid5ue1z3v2g0uh"
-    const email: string = "your@email.address"
-    const name: string = "Your Name"
+    const email: string     = "your@email.address"
+    const name: string      = "Your Name"
 
     const resp = await connectToSupermetricsAPI( client_id, email, name );
 
     const sl_token : string = resp.data.sl_token;
-    console.log( sl_token );
+    console.log( 'Give me one second please' );
 
     // Fetch data
     const posts = [];
@@ -42,7 +42,6 @@ async function task() {
     console.log( 'Total posts split by week number' );
     const totalPostsSplitByWeekNr : Array<TotalPostsSplitByWeekNumber> = totalPostsSplitByWeekNumber( posts );
     totalPostsSplitByWeekNr.forEach( t => console.log( 'week:', t.week, 'messagesCount:', t.messagesCount ) )
-
 
     // d. - Average number of posts per user per month
     console.log('#########################################################################');
