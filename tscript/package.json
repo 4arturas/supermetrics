@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "axios": "^0.26.0",
+    "dotenv": "^16.0.0",
+    "moment": "^2.29.1"
+  }
+}

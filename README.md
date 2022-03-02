@@ -1,4 +1,13 @@
-# Console implementation of the task
+# Typescript implementation of the task
+````
+git clone git@github.com:4arturas/supermetrics.git
+cd supermetrics/tscript
+npm install
+tsc
+node dist/task.js
+````
+
+# Vanilla JavaScript implementation of the task - optional
 ````
 git clone git@github.com:4arturas/supermetrics.git
 cd supermetrics/server
