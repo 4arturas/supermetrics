@@ -57,6 +57,7 @@ function averageCharactersLengthOfPostsPerMonth( posts )
                 averageCharacterLength: totalCharactersLengthPerMonth[month].reduce( ( previous, current ) => previous + current , 0 ) / totalCharactersLengthPerMonth[month].length }
         } );
 }
+
 /* Longest post by character length per month */
 function longestPostByCharacterLengthPerMonthOldSchool( posts )
 {
@@ -111,6 +112,7 @@ function longestPostByCharacterLengthPerMonth( posts )
                 longestMessage: longestMessageLengthPerMonth[month] }
         } );
 }
+
 /* Total posts split by week number*/
 function totalPostsSplitByWeekNumberOldSchool( posts )
 {
@@ -167,6 +169,7 @@ function totalPostsSplitByWeekNumber( posts )
         return { week: week, messagesCount: totalPostsByWeek[week] }
     } );
 }
+
 /* Average number of posts per user per month */
 function averageNumberOfPostsPerUserPerMonthOldSchool( posts )
 {
@@ -259,6 +262,7 @@ function averageNumberOfPostsPerUserPerMonth( posts )
        }
     });
 }
+
 module.exports = {
     averageCharactersLengthOfPostsPerMonthOldSchool,
     averageCharactersLengthOfPostsPerMonthSQL,
