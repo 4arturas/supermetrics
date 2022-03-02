@@ -3,12 +3,11 @@ import MuiGrid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import {CircularProgress} from "@mui/material";
 import Button from "@mui/material/Button";
-import {gql, useLazyQuery} from "@apollo/client";
+import {useLazyQuery} from "@apollo/client";
 import {useContext, useState} from "react";
 import {LoginContext, PostsContext} from "../../context/context";
 import Unauthorized from "../loginform/unauthorized";
 import {FETCH_SUPERMETRICS_POSTS, GENERATE_RANDOM_POSTS} from "../../query/user";
-import EnhancedTable from "./EnhancedTable";
 
 const Grid = styled(MuiGrid)(({ theme }) => ({
     width: '100%',
