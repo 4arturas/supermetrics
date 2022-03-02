@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express           = require('express');
 const { graphqlHTTP }   = require('express-graphql');
 const cors              = require('cors');
@@ -17,5 +19,6 @@ app.get('/', function(req, res) {
     res.send('Hello World!')
 });
 
-const APP_PORT = process.env.APP_PORT | 5001;
-app.listen( APP_PORT, () => console.log( `Application is running on port ${APP_PORT}` ) );
+const APP_PORT = process.env.APP_PORT;
+console.log( APP_PORT );
+app.listen( APP_PORT, () => console.log( `Application running on port ${APP_PORT}` ) );

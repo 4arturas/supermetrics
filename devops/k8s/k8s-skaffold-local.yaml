@@ -29,11 +29,11 @@ metadata:
     app: superm-k8s
 spec:
   selector:
-    app: cm-api-docs
+    app: superm-k8s
   ports:
     - port: 80
       protocol: TCP
-      name: cm-api-docs
+      name: superm-k8s
   type: ClusterIP
 ---
 apiVersion: networking.k8s.io/v1
@@ -44,7 +44,7 @@ metadata:
     nginx.ingress.kubernetes.io/redirect-regex: ^/(.*)
 spec:
   rules:
-    - host: cm-api-docs.local.clearpay-test.systems
+    - host: supermetrics.sys
       http:
         paths:
           - path: /
