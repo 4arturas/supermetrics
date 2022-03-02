@@ -27,9 +27,9 @@ function replacePlaceholdersInFile(file) {
 if ( APP_PORT === '80' )
     replacePlaceholdersInFile(INDEX_HTML);
 
-const sendIndexPage = async (req, res) => {
+async function sendIndexPage(req, res) {
     res.sendFile(INDEX_HTML);
-};
+}
 
 async function redirectIfNotAuthenticated(req, res, next) {
     return next();
@@ -43,5 +43,7 @@ app.use( '/graphql', graphqlHTTP({
 
 app.use(redirectIfNotAuthenticated, express.static(path.join(__dirname, APP_BUILD)));
 app.get('/', redirectIfNotAuthenticated, sendIndexPage);
+app.get('/posts', redirectIfNotAuthenticated, sendIndexPage);
+app.get('/statistics', redirectIfNotAuthenticated, sendIndexPage);
 
 app.listen( APP_PORT, () => console.log( `Application running on port ${APP_PORT}` ) );
