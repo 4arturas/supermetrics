@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import {LoginContext, PostsContext} from "../../context/context";
-import Unauthorized from "../unauthorized";
+import Unauthorized from "../Unauthorized";
 import EnhancedTable from "../EnhancedTable";
 import DataFetcher from "../DataFetcher";
 

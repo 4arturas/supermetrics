@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import {useLazyQuery} from "@apollo/client";
 import {useContext, useState} from "react";
 import {LoginContext, PostsContext} from "../context/context";
-import Unauthorized from "./unauthorized";
+import Unauthorized from "./Unauthorized";
 import {FETCH_SUPERMETRICS_POSTS, GENERATE_RANDOM_POSTS} from "../graphql/query";
 
 const Grid = styled(MuiGrid)(({ theme }) => ({

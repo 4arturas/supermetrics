@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {LoginContext, PostsContext} from "../../context/context";
-import Unauthorized from "../unauthorized";
+import Unauthorized from "../Unauthorized";
 import {Card, CardContent, Typography} from "@mui/material";
 import {
     AVERAGE_CHARACTERS_LENGTH_OF_POSTS_PER_MONTH, AVERAGE_NUMBER_OF_POSTS_PER_USER_PER_MONTH, GENERATE_RANDOM_POSTS,
