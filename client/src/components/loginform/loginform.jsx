@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import {CircularProgress} from "@mui/material";
 import {useContext, useState} from "react";
 import {useMutation} from "@apollo/client";
-import {LOGIN_USER} from "../../mutation/mutation";
+import {LOGIN_USER} from "../../graphql/mutation";
 import {LoginContext, PostsContext} from "../../context/context";
 
 function LoginForm() {

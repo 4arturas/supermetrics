@@ -7,7 +7,7 @@ import {useLazyQuery} from "@apollo/client";
 import {useContext, useState} from "react";
 import {LoginContext, PostsContext} from "../../context/context";
 import Unauthorized from "../loginform/unauthorized";
-import {FETCH_SUPERMETRICS_POSTS, GENERATE_RANDOM_POSTS} from "../../query/query";
+import {FETCH_SUPERMETRICS_POSTS, GENERATE_RANDOM_POSTS} from "../../graphql/query";
 
 const Grid = styled(MuiGrid)(({ theme }) => ({
     width: '100%',
