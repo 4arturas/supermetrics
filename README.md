@@ -27,6 +27,13 @@ Navigate to http://localhost:3000/
 - Install minikube https://minikube.sigs.k8s.io/docs/start/
 - Install skaffold https://skaffold.dev/docs/install/
 ````
+minikube config set memory 8000 && \
+minikube config set cpus 4 && \
+minikube config set driver docker && \
+minikube start
+minikube addons enable ingress
+````
+````
 git clone git@github.com:4arturas/supermetrics.git
 cd supermetrics
 skaffold dev
