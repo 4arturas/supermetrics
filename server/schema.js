@@ -60,13 +60,13 @@ const schema = buildSchema(`
     type AverageCharacterLengthOfPostsPerMonth
     {
          month: String
-         averageCharacterLength: String   
+         averageCharacterLength: Float   
     }
     
     type LongestPostByCharacterLengthPerMonth
     {
         month: String
-        longestMessage: String   
+        longestMessage: Int   
     }
     
     type TotalPostsSplitByWeekNumber
