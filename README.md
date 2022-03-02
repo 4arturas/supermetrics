@@ -47,6 +47,17 @@ nodemon server.js
 # GraphQL
 Console can be accessed dependently on environment http://localhost:4000/graphql or http://supermetrics.sys/graphql
 ````
+mutation {
+  loginUser( input: {
+    client_id: "ju16a6m81mhid5ue1z3v2g0uh",
+    email: "your@email.address",
+    name: "Your Name"
+  }) {
+    status, statusText, sl_token
+  }
+}
+````
+````
 query { generateRandomPosts {id, from_name, from_id, message, type, created_time} }
 ````
 ````
