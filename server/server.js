@@ -11,9 +11,11 @@ const fs                = require("fs");
 const app               = express();
 app.use( cors() );
 
+const APP_PORT      = process.env.APP_PORT;
+const APP_ADDRESS   = process.env.APP_ADDRESS;
 const APP_BUILD     = '../client/build';
 const INDEX_HTML    = path.join(__dirname, APP_BUILD) + '/index.html';
-const APP_ADDRESS   = process.env.APP_ADDRESS;
+
 function replacePlaceholdersInFile(file) {
     const contents = fs.readFileSync(file, 'utf8')
         .replace(
@@ -22,7 +24,8 @@ function replacePlaceholdersInFile(file) {
         );
     fs.writeFileSync(file, contents)
 }
-replacePlaceholdersInFile(INDEX_HTML);
+if ( APP_PORT === 80 )
+    replacePlaceholdersInFile(INDEX_HTML);
 
 const sendIndexPage = async (req, res) => {
     res.sendFile(INDEX_HTML);
@@ -41,5 +44,4 @@ app.use( '/graphql', graphqlHTTP({
 app.use(redirectIfNotAuthenticated, express.static(path.join(__dirname, APP_BUILD)));
 app.get('/', redirectIfNotAuthenticated, sendIndexPage);
 
-const APP_PORT = process.env.APP_PORT;
 app.listen( APP_PORT, () => console.log( `Application running on port ${APP_PORT}` ) );
