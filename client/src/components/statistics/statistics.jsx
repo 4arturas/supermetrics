@@ -51,7 +51,7 @@ function Statistics() {
 
     useEffect(() => {
 
-        if ( posts && averageCharactersLengthOfPostsPerMonth.length === 0 )
+        if ( posts )
         {
             firstCall();
             secondCall();
@@ -66,10 +66,17 @@ function Statistics() {
         return <Unauthorized/>
 
 
+    const callbackFunction = () =>
+    {
+        firstCall();
+        secondCall();
+        thirdCall();
+        forthCall();
+    }
 
     return <div>
         <h3>Statistics</h3>
-        <DataFetcher/>
+        <DataFetcher callbackFunction={callbackFunction}/>
         { posts &&
         <Card sx={{ minWidth: 275 }}>
             <CardContent>

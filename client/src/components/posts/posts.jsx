@@ -13,9 +13,13 @@ function Posts() {
     if ( !sltoken )
         return <Unauthorized/>
 
+    const callbackFunction = () => {
+
+    }
+
     return <div>
         <h3>Posts</h3>
-        <div><DataFetcher/></div>
+        <div><DataFetcher callbackFunction={callbackFunction}/></div>
         { posts && <EnhancedTable rows={posts}/> }
     </div>
 }

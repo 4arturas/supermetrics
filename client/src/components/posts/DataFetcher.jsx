@@ -17,7 +17,7 @@ const Grid = styled(MuiGrid)(({ theme }) => ({
     },
 }));
 
-function DataFetcher()
+function DataFetcher( {callbackFunction} )
 {
     const {sltoken}                     = useContext(LoginContext);
     const {setPosts}                    = useContext(PostsContext);
@@ -27,12 +27,14 @@ function DataFetcher()
         useLazyQuery( FETCH_SUPERMETRICS_POSTS, { variables: { sl_token: sltoken }, onCompleted: supermetricsPosts => {
             setPosts( supermetricsPosts.fetchSupermetricsPosts );
             setLoadingData( false );
+            callbackFunction();
         } } );
 
     const [randomPosts, { called: randomCalled, loading: randomLoading, data: randomData }] =
         useLazyQuery( GENERATE_RANDOM_POSTS, { onCompleted: randomPosts => {
             setPosts( randomPosts.generateRandomPosts );
             setLoadingData( false );
+            callbackFunction();
         } } );
 
     const handleSupermetricsPosts = (event) => {
