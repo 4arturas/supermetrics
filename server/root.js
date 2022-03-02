@@ -32,19 +32,19 @@ const root = {
     },
     averageCharactersLengthOfPostsPerMonth: () =>
     {
-        return statistics.averageCharactersLengthOfPostsPerMonthSQL( postsDB );
+        return statistics.averageCharactersLengthOfPostsPerMonth( postsDB );
     },
     longestPostByCharacterLengthPerMonth: () =>
     {
-        return statistics.longestPostByCharacterLengthPerMonthSQL( postsDB );
+        return statistics.longestPostByCharacterLengthPerMonth( postsDB );
     },
     totalPostsSplitByWeekNumber: () =>
     {
-        return statistics.totalPostsSplitByWeekNumberSQL( postsDB );
+        return statistics.totalPostsSplitByWeekNumber( postsDB );
     },
     averageNumberOfPostsPerUserPerMonth: () =>
     {
-        return statistics.averageNumberOfPostsPerUserPerMonthSQL( postsDB );
+        return statistics.averageNumberOfPostsPerUserPerMonth( postsDB );
     }
 }
 
