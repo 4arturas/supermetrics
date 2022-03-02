@@ -129,7 +129,6 @@ function EnhancedTable( {rows} ) {
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     const handleRequestSort = (event, property) => {
-        console.log( orderBy );
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
         setOrderBy(property);

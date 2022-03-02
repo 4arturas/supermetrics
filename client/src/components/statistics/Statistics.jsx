@@ -31,7 +31,6 @@ function Statistics() {
         { onCompleted: res => {
                 const d = res.longestPostByCharacterLengthPerMonth.flatMap( d => { return { xxx: d.month, yyy: d.longestMessage } } );
                 setLongestPostByCharacterLengthPerMonth(d);
-                console.log( d );
             }
         } );
 
