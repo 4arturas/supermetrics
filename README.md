@@ -34,7 +34,8 @@ skaffold dev
 ````
 minikube ip
 ````
-Navigate to http://${minikube ip}:30333
+
+
 
 ````
 node -r dotenv/config index.js
@@ -43,6 +44,8 @@ node -r dotenv/config index.js
 nodemon server.js
 ````
 
+# GraphQL
+Console can be accessed dependently on environment http://localhost:5001/graphql or http://supermetrics.sys/graphql
 ````
 query { generateRandomPosts {id, from_name, from_id, message, type, created_time} }
 ````
