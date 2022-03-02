@@ -20,6 +20,8 @@ spec:
           env:
             - name: APP_PORT
               value: '80'
+            - name: APP_ADDRESS
+              value: 'http://supermetrics.sys'
 ---
 apiVersion: v1
 kind: Service
