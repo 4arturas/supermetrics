@@ -19,7 +19,7 @@ const INDEX_HTML    = path.join(__dirname, APP_BUILD) + '/index.html';
 function replacePlaceholdersInFile(file) {
     const contents = fs.readFileSync(file, 'utf8')
         .replace(
-            'http://localhost:5001',
+            'http://localhost:4000',
             APP_ADDRESS
         );
     fs.writeFileSync(file, contents)
