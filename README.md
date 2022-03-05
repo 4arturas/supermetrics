@@ -15,6 +15,7 @@ cd supermetrics/server
 npm install
 node task.js
 ````
+[Video instruction is here](https://drive.google.com/file/d/1rGF7CAb56ExUDCz2X5J5N338GTAiCxdv/view?usp=sharing)
 
 # Web implementation of the task - optional
 ## Backend: nodejs+express
