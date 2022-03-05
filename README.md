@@ -32,6 +32,7 @@ npm install
 npm start
 ````
 Navigate to http://localhost:3000/
+[Video instruction is here](https://drive.google.com/file/d/1tVB4_kev4XiJBiBnIeSZLESOiKZJBia7/view?usp=sharing)
 
 # DevOps implementation - optional
 - Install docker https://docs.docker.com/get-docker/
