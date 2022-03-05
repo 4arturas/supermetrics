@@ -6,7 +6,7 @@ npm install
 tsc
 node dist/task.js
 ````
-https://drive.google.com/file/d/1Ys37UGrInZy7rZ_UO6bB3MHG6ehFj4kv/view?usp=sharing
+[Video instruction is here](https://drive.google.com/file/d/1Ys37UGrInZy7rZ_UO6bB3MHG6ehFj4kv/view?usp=sharing)
 
 # Vanilla JavaScript implementation of the task - optional
 ````
