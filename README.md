@@ -60,6 +60,8 @@ Add minikube ip into /etc/hosts file
 ````
 Navigate to http://supermetrics.sys
 
+[Video instruction is here](https://drive.google.com/file/d/1sXEoc1EQWFYxH8YLHPN3DjSGBKCutaiS/view?usp=sharing)
+
 # GraphQL
 Console can be accessed dependently on the environment http://localhost:4000/graphql or http://supermetrics.sys/graphql
 ````
