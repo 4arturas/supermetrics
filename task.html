@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alasql@1.7"></script>
 
     <style media="screen">
         /* Add space between Vega-Embed links  */
@@ -154,6 +155,67 @@
     </script>
 
     <script>
+        /* Average character length of posts per month */
+        function averageCharactersLengthOfPostsPerMonthSQL( posts )
+        {
+            // id, from_name, from_id, message, type, created_time
+            // const res = alasql('SELECT a, SUM(b) AS b FROM ? GROUP BY a',[posts]);
+            alasql.fn.messageLength = function(message) {
+                return message.length;
+            };
+            alasql.fn.converteCreatedTimeToYYYYMMM = function(created_time) {
+                return moment(created_time).format(`YYYY-MM`);
+            };
+            let averages = alasql('SELECT messageLength(message) AS messageLength, converteCreatedTimeToYYYYMMM(created_time) as month FROM ?', [posts]);
+            averages = alasql( 'SELECT month, AVG(messageLength) AS averageCharacterLength FROM ? GROUP BY month ORDER BY month', [averages] );
+            // const res = alasql('SELECT avg(message) FROM ?',[posts]);
+            return averages;
+        }
+
+        /* Longest post by character length per month */
+        function longestPostByCharacterLengthPerMonthSQL( posts )
+        {
+            alasql.fn.messageLength = function(message) {
+                return message.length;
+            };
+            alasql.fn.converteCreatedTimeToYYYYMMM = function(created_time) {
+                return moment(created_time).format(`YYYY-MM`);
+            };
+            let longestMessages = alasql('SELECT messageLength(message) AS messageLength, converteCreatedTimeToYYYYMMM(created_time) as month FROM ?', [posts]);
+            longestMessages = alasql( 'SELECT month, MAX(messageLength) AS longestMessage FROM ? GROUP BY month ORDER BY month', [longestMessages] );
+            return longestMessages;
+        }
+
+        /* Total posts split by week number*/
+        function totalPostsSplitByWeekNumberSQL( posts )
+        {
+            alasql.fn.converteCreatedTimeToYYYYWeek = function(created_time) {
+                const date = moment(created_time, 'YYYY-MM-DD[T]HH:mm:ss');
+                const year = date.year();
+                const weekNumber = date.week();
+                return year + '-' + weekNumber;
+            };
+            let ret = alasql('SELECT message, converteCreatedTimeToYYYYWeek(created_time) as week FROM ?', [posts]);
+            ret = alasql( 'SELECT week, count(message) AS messagesCount FROM ? GROUP BY week ORDER BY week', [ret] );
+            return ret;
+        }
+
+        /* Average number of posts per user per month */
+        function averageNumberOfPostsPerUserPerMonthSQL( posts )
+        {
+            alasql.fn.converteCreatedTimeToYYYYMMM = function(created_time) {
+                return moment(created_time).format(`YYYY-MM`);
+            };
+
+            let averageMessagesPerUserPerMonth = alasql('SELECT from_id, message, converteCreatedTimeToYYYYMMM(created_time) as month FROM ?', [posts]);
+            averageMessagesPerUserPerMonth = alasql('SELECT from_id, COUNT(message) AS messageCount, month FROM ? GROUP BY from_id, month', [averageMessagesPerUserPerMonth]);
+            averageMessagesPerUserPerMonth = alasql('SELECT from_id, SUM(messageCount)/COUNT(month) AS averagePerMonth FROM ? GROUP BY from_id ORDER BY from_id', [averageMessagesPerUserPerMonth]);
+
+            return averageMessagesPerUserPerMonth;
+        }
+    </script>
+
+    <script>
         function barChart( container, values, xField, yField, xTitle, yTitle )
         {
             // Assign the specification to a local variable vlSpec.
@@ -247,16 +309,16 @@
         // const data = await getData();
         // const posts = data.data;
 
-        const averageCharLengthOfPostsPerMonth = averageCharactersLengthOfPostsPerMonth( posts );
+        const averageCharLengthOfPostsPerMonth = averageCharactersLengthOfPostsPerMonthSQL( posts );
         barChart( 'averageCharLengthOfPostsPerMonth', averageCharLengthOfPostsPerMonth, 'month', 'averageCharacterLength', 'Month', 'Average character length' );
 
-        const longestPostByCharLenPerMonth = longestPostByCharacterLengthPerMonth( posts );
+        const longestPostByCharLenPerMonth = longestPostByCharacterLengthPerMonthSQL( posts );
         barChart( 'longestPostByCharLenPerMonth', longestPostByCharLenPerMonth, 'month', 'longestMessage', 'Month', 'Longest Message' );
 
-        const totalPostsSplitByWeekNr = totalPostsSplitByWeekNumber( posts );
+        const totalPostsSplitByWeekNr = totalPostsSplitByWeekNumberSQL( posts );
         barChart( 'totalPostsSplitByWeekNr', totalPostsSplitByWeekNr, 'week', 'messagesCount', 'Week', 'Messages Count' );
 
-        const averageNrOfPostsPerUserPerMonth = averageNumberOfPostsPerUserPerMonth( posts );
+        const averageNrOfPostsPerUserPerMonth = averageNumberOfPostsPerUserPerMonthSQL( posts );
         barChart( 'averageNrOfPostsPerUserPerMonth', averageNrOfPostsPerUserPerMonth, 'from_id', 'averagePerMonth', 'User', 'Average posts per month' );
     }
     task();
