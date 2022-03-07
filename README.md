@@ -43,9 +43,9 @@ Navigate to http://localhost:3000/
 [Video instruction is here](https://drive.google.com/file/d/1tVB4_kev4XiJBiBnIeSZLESOiKZJBia7/view?usp=sharing)
 
 # DevOps implementation - optional
-- Install docker https://docs.docker.com/get-docker/
-- Install minikube https://minikube.sigs.k8s.io/docs/start/
-- Install skaffold https://skaffold.dev/docs/install/
+- Install *docker* https://docs.docker.com/get-docker/
+- Install *minikube* https://minikube.sigs.k8s.io/docs/start/
+- Install *skaffold* https://skaffold.dev/docs/install/
 ````
 minikube config set memory 8000 && \
 minikube config set cpus 4 && \
@@ -61,7 +61,7 @@ skaffold dev
 ````
 minikube ip
 ````
-Add minikube ip into /etc/hosts file
+Add *minikube* ip into /etc/hosts file
 ````
 192.168.49.2    supermetrics.sys
 ````
@@ -70,7 +70,7 @@ Navigate to http://supermetrics.sys
 [Video instruction is here](https://drive.google.com/file/d/1sXEoc1EQWFYxH8YLHPN3DjSGBKCutaiS/view?usp=sharing)
 
 # GraphQL
-Console can be accessed dependently on the environment http://localhost:4000/graphql or http://supermetrics.sys/graphql
+Console can be accessed dependently on the environment either http://localhost:4000/graphql or http://supermetrics.sys/graphql
 ````
 mutation {
   loginUser( input: {
