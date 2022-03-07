@@ -8,7 +8,7 @@ node dist/task.js
 ````
 [Video instruction is here](https://drive.google.com/file/d/1Ys37UGrInZy7rZ_UO6bB3MHG6ehFj4kv/view?usp=sharing)
 
-# HTML implementation
+# HTML implementation - optional
 ````
 git clone git@github.com:4arturas/supermetrics.git
 cd supermetrics
