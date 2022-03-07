@@ -257,14 +257,17 @@
 <body>
 
 <div>
-    <input id="client_id" type="text" value="ju16a6m81mhid5ue1z3v2g0uh"><br/>
-    <input id="email" type="text" value="your@email.address"><br/>
-    <input id="name" type="text" value="Your Name"><br/>
-    <button onclick="task();">Submit</button>
+    <br/>
+    <input id="client_id" type="text" value="ju16a6m81mhid5ue1z3v2g0uh"><br/><br/>
+    <input id="email" type="text" value="your@email.address"><br/><br/>
+    <input id="name" type="text" value="Your Name"><br/><br/>
+    <button id="submitButton" onclick="document.getElementById('wait').style.display = ''; document.getElementById('table').style.display = 'none'; this.style.display='none'; task();">Submit</button>
+    <div id="wait" style="display: none">Give me one second please...</div>
 </div>
 <br/>
 <br/>
-<table>
+
+<table id="table" style="display: none">
     <tr><td>
         <h5>Average character length of posts per month</h5>
         <div id="averageCharLengthOfPostsPerMonth"></div>
@@ -320,8 +323,12 @@
 
         const averageNrOfPostsPerUserPerMonth = averageNumberOfPostsPerUserPerMonthSQL( posts );
         barChart( 'averageNrOfPostsPerUserPerMonth', averageNrOfPostsPerUserPerMonth, 'from_id', 'averagePerMonth', 'User', 'Average posts per month' );
+
+        document.getElementById('table').style.display = '';
+        document.getElementById('submitButton').style.display = '';
+        document.getElementById('wait').style.display = 'none';
     }
-    task();
+    // task();
 </script>
 
 <script>
