@@ -13,7 +13,7 @@ node dist/task.js
 git clone git@github.com:4arturas/supermetrics.git
 cd supermetrics
 ````
-open task.html with browser
+open task.html with browser and click Submit button
 
 # Vanilla JavaScript implementation of the task - optional
 ````
