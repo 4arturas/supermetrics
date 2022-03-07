@@ -6,6 +6,7 @@ npm install
 tsc
 node dist/task.js
 ````
+[Video instruction is here](https://drive.google.com/file/d/1Ys37UGrInZy7rZ_UO6bB3MHG6ehFj4kv/view?usp=sharing)
 
 # HTML implementation
 ````
@@ -21,6 +22,7 @@ cd supermetrics/server
 npm install
 node task.js
 ````
+[Video instruction is here](https://drive.google.com/file/d/1rGF7CAb56ExUDCz2X5J5N338GTAiCxdv/view?usp=sharing)
 
 # Web implementation of the task - optional
 ## Backend: nodejs+express
@@ -37,6 +39,8 @@ npm install
 npm start
 ````
 Navigate to http://localhost:3000/
+
+[Video instruction is here](https://drive.google.com/file/d/1tVB4_kev4XiJBiBnIeSZLESOiKZJBia7/view?usp=sharing)
 
 # DevOps implementation - optional
 - Install docker https://docs.docker.com/get-docker/
@@ -62,6 +66,8 @@ Add minikube ip into /etc/hosts file
 192.168.49.2    supermetrics.sys
 ````
 Navigate to http://supermetrics.sys
+
+[Video instruction is here](https://drive.google.com/file/d/1sXEoc1EQWFYxH8YLHPN3DjSGBKCutaiS/view?usp=sharing)
 
 # GraphQL
 Console can be accessed dependently on the environment http://localhost:4000/graphql or http://supermetrics.sys/graphql
