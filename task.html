@@ -153,6 +153,44 @@
         }
     </script>
 
+    <script>
+        function barChart( container, values, xField, yField, xTitle, yTitle )
+        {
+            // Assign the specification to a local variable vlSpec.
+            var vlSpec = {
+                $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+                data: {
+                    values: values
+                },
+                mark: 'bar',
+                encoding: {
+                    x: {
+                        field: xField,
+                        type: 'nominal',
+                        axis: {
+                            title: xTitle
+                        }
+                    },
+                    y: {
+                        // aggregate: 'mean',
+                        field: yField,
+                        type: 'quantitative',
+                        axis: {
+                            title: yTitle
+                        }
+                    }
+                },
+                width: { step : 40},
+                detail: {
+                    field: yTitle
+                }
+            };
+
+            // Embed the visualization in the container with id `vis`
+            vegaEmbed('#'+container, vlSpec);
+        }
+    </script>
+
 </head>
 <body>
 
@@ -165,53 +203,24 @@
 <br/>
 <br/>
 <table>
-    <tr><td><div id="averageCharLengthOfPostsPerMonth"></div></td></tr>
-    <tr><td><div id="longestPostByCharLenPerMonth"></div></td></tr>
-    <tr><td><div id="totalPostsSplitByWeekNr"></div></td></tr>
-    <tr><td><div id="averageNrOfPostsPerUserPerMonth"></div></td></tr>
+    <tr><td>
+        <h5>Average character length of posts per month</h5>
+        <div id="averageCharLengthOfPostsPerMonth"></div>
+    </td></tr>
+    <tr><td>
+        <h5>Longest post by character length per month</h5>
+        <div id="longestPostByCharLenPerMonth"></div>
+    </td></tr>
+    <tr><td>
+        <h5>Total posts split by week number</h5>
+        <div id="totalPostsSplitByWeekNr"></div>
+    </td></tr>
+    <tr><td>
+        <h5>Average number of posts per user per month</h5>
+        <div id="averageNrOfPostsPerUserPerMonth"></div>
+    </td></tr>
 </table>
 
-
-
-
-
-<script>
-    function barChart( container, values, xField, yField, xTitle, yTitle )
-    {
-        // Assign the specification to a local variable vlSpec.
-        var vlSpec = {
-            $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-            data: {
-                values: values
-            },
-            mark: 'bar',
-            encoding: {
-                x: {
-                    field: xField,
-                    type: 'nominal',
-                    axis: {
-                        title: xTitle
-                    }
-                },
-                y: {
-                    // aggregate: 'mean',
-                    field: yField,
-                    type: 'quantitative',
-                    axis: {
-                        title: yTitle
-                    }
-                }
-            },
-            width: { step : 40},
-            detail: {
-                field: yTitle
-            }
-        };
-
-        // Embed the visualization in the container with id `vis`
-        vegaEmbed('#'+container, vlSpec);
-    }
-</script>
 
 <script>
 
@@ -250,7 +259,7 @@
         const averageNrOfPostsPerUserPerMonth = averageNumberOfPostsPerUserPerMonth( posts );
         barChart( 'averageNrOfPostsPerUserPerMonth', averageNrOfPostsPerUserPerMonth, 'from_id', 'averagePerMonth', 'User', 'Average posts per month' );
     }
-    // task();
+    task();
 </script>
 
 <script>
