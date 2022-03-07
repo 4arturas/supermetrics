@@ -224,7 +224,20 @@
                 data: {
                     values: values
                 },
-                mark: 'bar',
+                layer: [{
+                    mark: "bar"
+                }, {
+                    mark: {
+                        type: "text",
+                        align: "center",
+                        baseline: "middle",
+                        // dx: -4,
+                        dy: -6
+                    },
+                    encoding: {
+                        text: {"field": yField, "type": "quantitative"}
+                    }
+                }],
                 encoding: {
                     x: {
                         field: xField,
@@ -242,7 +255,7 @@
                         }
                     }
                 },
-                width: { step : 40}
+                width: { step : 60}
             };
 
             // Embed the visualization in the container with id `vis`
